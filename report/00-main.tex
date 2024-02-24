@@ -1,0 +1,425 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                          AUTHOR: BIBEKANANDA DATTA                         %%
+%%                             (C) FEBRUARY 2024                              %%
+%%                      PHD STUDENT, MECHANICAL ENGINEERING                   %%
+%%                           JOHNS HOPKINS UNIVERSITY                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{report}
+
+\usepackage[utf8]{inputenc}	    %input
+\DeclareUnicodeCharacter{2212}{-}
+%% math packages
+\usepackage{amsfonts,amssymb,amsmath,amsthm,cancel,dsfont,mathtools,mathbbol,siunitx,upgreek,mathrsfs}
+
+\usepackage{autobreak}
+\usepackage[ruled]{algorithm2e} %algorithm package
+\usepackage[titletoc]{appendix}
+\usepackage[american]{babel}
+\usepackage[natbib, backend=biber, style=apa, doi=true]{biblatex}
+\usepackage{blindtext}
+
+\usepackage{calc}
+\usepackage[font=small, labelfont=bf, labelsep=period,  hypcap=true]{caption}
+\usepackage{color}
+\usepackage{epigraph,varwidth}
+\usepackage{enumitem}			%list environment
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\usepackage[all]{hypcap}        % for captions on the side of figures
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{lmodern}
+\usepackage{lipsum}
+\usepackage[pagewise,mathlines]{lineno}     % linenumbers
+\usepackage{csquotes}                       % for quote environment
+
+\usepackage{listings}
+% table related packages
+\usepackage{booktabs,longtable,makecell,multicol,multirow,tabularx,xltabular}
+%\usepackage[protrusion]{microtype}
+\usepackage{textcomp}
+\usepackage{sectsty}
+
+\usepackage{setspace}
+\usepackage{seqsplit}
+\usepackage[rightcaption]{sidecap}
+\usepackage{soul}
+\usepackage[titles]{tocloft}
+\usepackage{parskip}
+\usepackage{titlesec}
+%\usepackage{tocbibind}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows}
+\usepackage{subfig}    % Individual panel captions
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS FOR TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% TOC shows 3 levels (chapter to subsection) in the list
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}     % section to ... subsubsection
+
+
+% Dots for chapters too
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+
+% Tweak to TOC to add 'chapter' to the chapter name instead of a number only
+% Set the width of the box based on the longest label name
+\renewcommand{\cftchappresnum}{\chaptername\space}
+\setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999~}}}
+
+
+% Tweak to TOC to add 'Figure' to the figure caption listing
+% To change the distance to the start of the figure title
+\renewcommand{\cftfigpresnum}{\bfseries Figure }
+\setlength{\cftfignumwidth}{\widthof{\textbf{Figure~99.999~}}}
+
+% Tweak to TOC to add 'Table' to the Table caption listing
+% To change the distance to the start of the figure title
+\renewcommand{\cfttabpresnum}{\bfseries Table }
+\setlength{\cfttabnumwidth}{\widthof{\textbf{Table~99.100~}}}
+
+
+%%%% UNNUMBERED CHAPTERS, SECTION, and SUBSECTION COMMAND for ADDING to TOC
+% Removes 'Chapter #' title while keeping
+% it listed in the TOC
+\newcommand\chap[1]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{#1}}
+% Removes 'Section #' title while keeping
+% it listed in the TOC
+\newcommand\sect[1]{%
+  \section*{#1}%
+  \addcontentsline{toc}{section}{#1}}
+% Removes 'Subsection #'title while keeping
+% it listed in the TOC
+\newcommand\subsect[1]{%
+  \subsection*{#1}%
+  \addcontentsline{toc}{subsection}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% END SETTINGS FOR TOC %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% SETTINGS FOR CHAPTER HEADINGS %%%%%%%%%%%%%%%%%%%%%%
+
+%% chapter # and title settings (with gaps)
+%% if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to -(some_value)
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{-72 \p@}            % space from the top of the page to chapter #
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \singlespacing \Large \bfseries \@chapapp\enskip \thechapter 
+        \\ \vspace{-12pt}   % space between chapter # and title
+    \fi
+        \interlinepenalty\@M
+        \singlespacing \Large \bfseries #1\par\nobreak
+    \vskip 24 \p@           % space between the chapter title and the following text
+  }}
+\makeatother
+
+
+%%%% settings for unnumbered chapters
+% if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to - (some_value)
+\makeatletter
+\def\@makeschapterhead#1{%
+  \vspace*{-96 \p@}           % space before the title
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Large \singlespacing \bfseries  #1\par\nobreak
+    \vskip 24 \p@ % space after the title
+  }}
+\makeatother
+
+%%%%%%%%%%%%%%%%%% END SETTINGS FOR CHAPTER HEADINGS %%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% EPIGRAPH SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Following settings allow the epigraph and the underline 
+%% to be arbitrary to the epigraph length
+\renewcommand{\epigraphflush}{flushright}
+\renewcommand{\epigraphsize}{\small}
+\setlength{\epigraphwidth}{0.6\textwidth}
+\renewcommand{\textflush}{flushright}
+\renewcommand{\sourceflush}{flushright}
+% A useful addition
+\newcommand{\epitextfont}{\itshape}
+\newcommand{\episourcefont}{\scshape}
+
+\makeatletter
+\newsavebox{\epi@textbox}
+\newsavebox{\epi@sourcebox}
+\newlength\epi@finalwidth
+\renewcommand{\epigraph}[2]{%
+  \vspace{\beforeepigraphskip}
+  {\epigraphsize\begin{\epigraphflush}
+   \epi@finalwidth=\z@
+   \sbox\epi@textbox{%
+     \varwidth{\epigraphwidth}
+     \begin{\textflush}\epitextfont#1\end{\textflush}
+     \endvarwidth
+   }%
+   \epi@finalwidth=\wd\epi@textbox
+   \sbox\epi@sourcebox{%
+     \varwidth{\epigraphwidth}
+     \begin{\sourceflush}\episourcefont#2\end{\sourceflush}%
+     \endvarwidth
+   }%
+   \ifdim\wd\epi@sourcebox>\epi@finalwidth 
+     \epi@finalwidth=\wd\epi@sourcebox
+   \fi
+   \leavevmode\vbox{
+     \hb@xt@\epi@finalwidth{\hfil\box\epi@textbox}
+     \vskip 1ex         % gap between quote and rule
+     \hrule height \epigraphrule
+     \vskip 1ex         % gap between rule and author
+     \hb@xt@\epi@finalwidth{\hfil\box\epi@sourcebox}
+   }%
+   \end{\epigraphflush}
+   \vspace{\afterepigraphskip}}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%% END EPIGRAPH SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% margin settings required by JH library (geometry package)
+\geometry{letterpaper, top= 1.25 in, bottom= 1.25 in, left= 1 in, right= 1 in, includehead, headheight=30pt, headsep=10pt}
+
+
+%% Sets paragraph (and not title) spacing, roughly speaking
+\renewcommand{\arraystretch}{1.5}       % spacing inside table
+\setlength{\parskip}{12pt}              % paragraph skip
+\setlength{\parindent}{0pt}             % paragraph indentation
+\setlength{\bibitemsep}{\baselineskip}  % bib item separation 
+
+
+%%%% using titlesec package for sections, subsection .. heading format
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\itshape}
+
+%% settings for hyperref package
+\hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% PERSONAL MATH SETTINGS
+\numberwithin{equation}{chapter}        % eqn no with chapter prefix
+
+\allowdisplaybreaks[1]
+\setcounter{MaxMatrixCols}{20}
+
+% define math symbols
+\numberwithin{equation}{section}
+\newcommand{\dC}{$^{\circ}$C}
+\DeclareMathOperator{\R}{\mathrm{R}}
+\DeclareMathOperator{\T}{{\top}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\mat}[1]{\mathbf{#1}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\skw}{skw}
+
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\Divg}{Div}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Grad}{Grad}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Curl}{Curl}
+
+\DeclareMathOperator{\sgn}{sign}
+
+
+\DeclareMathOperator*{\Aop}{A}
+\makeatletter
+\DeclareRobustCommand\bigop[2][1]{%
+  \mathop{\vphantom{\sum}\mathpalette\bigop@{{#1}{#2}}}\slimits@
+}
+\newcommand{\bigop@}[2]{\bigop@@#1#2}
+\newcommand{\bigop@@}[3]{%
+  \vcenter{%
+    \sbox\z@{$#1\sum$}%
+    \hbox{\resizebox{\ifx#1\displaystyle#2\fi\dimexpr\ht\z@+\dp\z@}{!}{$\m@th#3$}}%
+  }%
+}
+\makeatother
+\newcommand{\bigA}{\DOTSB\bigop[1]{\mathsf{A}}}
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%% ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%%%
+
+%% settings for algorithm2e package
+\renewcommand{\algorithmcfname}{Procedure}
+\SetKwFor{While}{while}{}{end while}%
+\SetArgSty{textnormal}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+\SetCommentSty{mycommfont}
+
+
+
+%% listing package definition (to add code in the document)
+\usepackage{listings}
+\lstdefinestyle{terminal}{columns=fullflexible,
+keepspaces=true,
+breaklines=true,
+basicstyle={\footnotesize\fontfamily{fvm}\fontseries{m}\selectfont},
+keywordstyle={\footnotesize\fontfamily{fvm}\fontseries{b}\selectfont},
+commentstyle={\color{comments}\small\fontfamily{fvm}\itshape\selectfont},
+frame=single,
+xleftmargin=0in,
+backgroundcolor=\color{lightgray!50},
+belowcaptionskip=10pt,
+aboveskip=0.5cm}
+\lstset{style=terminal,float=h,language=bash}
+
+%%%%%%%%%%%%%%%%% END ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% for basic commenting purposes (you can add more)
+\newcommand{\redtext}{\textcolor{red}}
+\newcommand{\ADDCITATION}{\redtext{(ADD CITATION)}}
+\newcommand{\ADDFIGURE}{\redtext{(ADD FIGURE)}}
+\newcommand{\ADDTABLE}{\redtext{(ADD TABLE)}}
+
+%% to add quotes
+\newcommand{\say}[2]{\hfill\small\enquote{\textit{#1}}{ - \small\textsc{#2}.}}
+
+%% you can use other packages for more complicated review and comment section
+
+%%%%%%%%%%%%%%%%%%%% END SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% add all the images to that folder
+% you can add images in chapter-wise PDF format (my preference).
+\graphicspath{{figures/}}
+
+
+
+%% this file has to be in BibLaTeX format. Use Zotero or another citation manager to generate the .bib file in BibLaTeX format.
+\addbibresource{template.bib}
+
+
+
+%% choice a font form (or add something else) for your thesis.
+\usepackage{lmodern}
+%\usepackage[sc]{mathpazo}
+%\usepackage{times}             %times new roman
+
+%%%%%%%%%%%%%%%%%%%%%%%%% END BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\begin{document}
+
+
+
+
+%% TITLE
+\onehalfspacing                 % for title page
+\include{01-title}              % title page
+
+%% FRONT MATTER
+
+% header and page numbering set up
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\fancyhead[R]{}
+\fancyhead[L]{\nouppercase \leftmark}
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+
+
+\onehalfspacing
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+%%% END OF FRONT MATTER
+
+
+%% BEGINNING OF MAIN TEXT
+
+\clearpage
+\pagenumbering{arabic}
+\fancyhead[L]{\chaptername\ \thechapter. \nouppercase \leftmark}
+\singlespacing          % restore single spacing in chapter contents
+
+
+\include{03-chapter-1}
+\include{04-chapter-2}
+\include{05-chapter-3}
+\include{06-chapter-4}
+\include{07-chapter-5}
+
+%% END OF MAIN TEXT
+
+
+
+%% BACK MATTER
+\clearpage
+\singlespacing      % ensure single spacing
+\markboth{Bibliographic references}{}
+\fancyhead[L]{\leftmark}
+\include{08-references}
+
+
+\singlespacing      % ensure single spacing
+\fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
+\include{09-appendix-A}
+\include{10-appendix-B}
+%% END OF BACK MATTER
+
+
+\end{document}

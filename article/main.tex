@@ -1,0 +1,384 @@
+\documentclass[12pt]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}	    %input
+\usepackage[pagewise,mathlines]{lineno}
+
+% math packages 
+\usepackage{amsfonts,amssymb,amsmath,amsthm,dsfont,mathtools,mathbbol,siunitx,upgreek,mathrsfs}
+\usepackage{authblk}
+\usepackage[ruled]{algorithm2e} % algorithm package
+
+\usepackage[title,toc,titletoc]{appendix}
+\setcounter{tocdepth}{2}
+\usepackage{autobreak}
+\usepackage[english]{babel}		% for other languages
+% bibliographic package
+\usepackage[backend=biber, style=apa6, doi=true]{biblatex}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{color}
+\usepackage{enumitem}			 % list environment
+\usepackage{float}               % for image floating
+\usepackage[T1]{fontenc}		 % output
+\usepackage{geometry}            % margin manipulation
+\usepackage[bottom,symbol]{footmisc}
+\usepackage{graphicx}           %for image  
+\usepackage{hyperref}
+%% table-related packages
+\usepackage{booktabs,longtable,makecell,multicol,multirow,tabularx,xltabular}
+\usepackage{minted}
+\usepackage{csquotes}           % for quote environment
+\usepackage{parskip}
+\usepackage{pdflscape}
+\usepackage{setspace}           % overall spacing of the contents
+\usepackage{soul}
+\usepackage{titlesec}
+\usepackage{verbatim}	        %comment environment
+\usepackage[dvipsnames]{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% margin settings for the page
+\geometry{top= 1.25 in, bottom= 1.25 in, left= 1 in, right= 1 in}
+
+
+%% authblk title, author, and affiliation font size
+%% use symbols up to the same number of authors
+%% otherwise it will start showing up in the footnotes
+\renewcommand*{\Authfont}{\normalsize}
+\DefineFNsymbolsTM{otherfnsymbols}{%
+  \textdagger    \dagger
+  \textdaggerdbl \ddagger
+  \textsection   \mathsection
+}%
+\setfnsymbol{otherfnsymbols}
+\renewcommand\Affilfont{\itshape\small}
+\setlength{\affilsep}{1em}
+
+
+%% no indent with single paragraph spacing
+\setlength{\parindent}{0px}
+\setlength{\parskip}{\baselineskip}
+\setlength{\footnotesep}{\baselineskip}
+\setlength{\marginparwidth}{2.5cm} 
+\setlength{\bibitemsep}{0.25\baselineskip}  %% bib item separation 
+\def\arraystretch{1.25}
+
+
+%% section, subsection, subsubsection, and paragraph
+\setcounter{secnumdepth}{4}
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\titleformat{\paragraph}
+{\normalfont\normalsize}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+%% figure caption settings
+\captionsetup{belowskip=0pt}
+
+%% footnote settings
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%% bibliography settings
+\DeclareFieldFormat{titlecase}{#1}
+\AtBeginBibliography{\urlstyle{rm}}
+
+
+\hypersetup{hidelinks,colorlinks=true,urlcolor=blue,linkcolor=black, citecolor=blue}
+
+%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTINGS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\allowdisplaybreaks[1]
+\setcounter{MaxMatrixCols}{20}
+
+% define math symbols
+\numberwithin{equation}{section}
+\newcommand{\dC}{$^{\circ}$C}
+\DeclareMathOperator{\R}{\mathrm{R}}
+\DeclareMathOperator{\T}{{\top}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\mat}[1]{\mathbf{#1}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\skw}{skw}
+
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\grad}{grad}
+
+\DeclareMathOperator{\Divg}{Div}
+\DeclareMathOperator{\Grad}{Grad}
+\DeclareMathOperator{\Curl}{Curl}
+
+\DeclareMathOperator{\sgn}{sign}
+
+
+\DeclareMathOperator*{\Aop}{A}
+\makeatletter
+\DeclareRobustCommand\bigop[2][1]{%
+  \mathop{\vphantom{\sum}\mathpalette\bigop@{{#1}{#2}}}\slimits@
+}
+\newcommand{\bigop@}[2]{\bigop@@#1#2}
+\newcommand{\bigop@@}[3]{%
+  \vcenter{%
+    \sbox\z@{$#1\sum$}%
+    \hbox{\resizebox{\ifx#1\displaystyle#2\fi\dimexpr\ht\z@+\dp\z@}{!}{$\m@th#3$}}%
+  }%
+}
+\makeatother
+\newcommand{\bigA}{\DOTSB\bigop[1]{\mathsf{A}}}
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%% ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%%%
+
+%% settings for algorithm2e package
+\renewcommand{\algorithmcfname}{Procedure}
+\SetKwFor{While}{while}{}{end while}%
+\SetArgSty{textnormal}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+\SetCommentSty{mycommfont}
+
+
+%% listing package definition (to add code in the document)
+\usepackage{listings}
+\lstdefinestyle{terminal}{columns=fullflexible,
+keepspaces=true,
+breaklines=true,
+basicstyle={\footnotesize\fontfamily{fvm}\fontseries{m}\selectfont},
+keywordstyle={\footnotesize\fontfamily{fvm}\fontseries{b}\selectfont},
+commentstyle={\color{comments}\small\fontfamily{fvm}\itshape\selectfont},
+frame=single,
+xleftmargin=0in,
+backgroundcolor=\color{lightgray!50},
+belowcaptionskip=10pt,
+aboveskip=0.5cm}
+\lstset{style=terminal,float=h,language=bash}
+
+%%%%%%%%%%%%%%%%% END ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% for basic commenting purposes (you can add more)
+\newcommand{\COMMENT}{\textcolor{red}}
+\newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
+\newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
+\newcommand{\ADDTABLE}{\COMMENT{(ADD TABLE)}}
+
+%% to add quotes
+\newcommand{\say}[2]{\hfill\small\enquote{\textit{#1}}{ - \small\textsc{#2}.}}
+
+%% you can use other packages for more complicated review and comment section
+
+%%%%%%%%%%%%%%%%%%%% END SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% document spacing
+\singlespacing
+
+
+%% document font (uncomment only one of the following; you can add more)
+\usepackage{lmodern}    	    %latin modern font
+%\usepackage[sc]{mathpazo}
+%\usepackage{times}             %times new roman
+
+
+%% may be useful during drafting
+%\linenumbers
+
+%% I use Zotero to generate the BibLaTeX file and include it in the same directory
+%% \addbibresource{template.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% END BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%     SOME EXAMPLE ENVIRONMENTS    %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+
+%% Check out this tutorial for list: https://www.overleaf.com/learn/latex/Lists
+
+%% Produces an un-numbered list of items with 0.75 cm distance from the left margin with line spacing between items and top with diamond label
+\begin{itemize}[leftmargin=0.75cm, itemsep=-0.3cm, topsep=-0.3cm,label={$\bullet$}]
+    \item 
+    \item
+    \item
+\end{itemize}
+
+%% Produces numbered item lists
+\begin{enumerate}[leftmargin=0.75cm, itemsep=-0.3cm, topsep=-0.3cm]
+  \item 
+  \item 
+  \item 
+\end{enumerate}
+
+%% Produces a nested itemized list
+\begin{enumerate}
+    \item 
+    \item 
+        \begin{description}[topsep=5pt, style=multiline, leftmargin= 2.5cm, itemsep = 5pt]
+            \item [Research] 
+                \begin{itemize}
+                    \item 
+                    \item
+                \end{itemize}
+            \item [Academic]
+                \begin{enumerate}
+                    \item 
+                    \item
+                \end{enumerate}
+        \end{description}
+    \item 
+\end{enumerate}
+
+%% HIGHLY RECOMMENDED: Check out these tutorials for math: https://www.overleaf.com/learn/latex/Mathematics
+
+%% Produces numbered equations
+\begin{equation} \label{eq:some-name}
+    % some equation
+\end{equation}
+
+%% Produces a centered set of equations
+\begin{equation} \label{eq:some-name}
+    \begin{gathered}
+        % some equation \\
+        % next equation \\
+        % another equation
+    \end{gathered}
+\end{equation}
+
+%% Produces aligned multi-line equations (aligned along the & symbols)
+\begin{equation} \label{eq:some-name}
+    \begin{aligned}
+    % some & equation \\
+    % next & equation \\
+    % another & equation
+    \end{aligned}
+\end{equation}
+
+%% Adds figure of specific width (height is scaled but you can define height and angle as well)
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width= a cm] {filename.extension}
+    \caption{some-caption}
+    \label{fig:some-name}
+\end{center}
+\end{figure}
+
+%% Adds figure from a specific page of a pdf. It specifies the width (a) of the picture in the document and trims from the left bottom right top for b, c, d, e cm.
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width= a cm, trim={b cm c cm d cm e cm}, clip, page= f] {some-pdf.pdf}
+    \caption{some-caption}
+    \label{fig:some-name}
+\end{center}
+\end{figure}
+
+%% For the table, see the tutorial here: https://www.overleaf.com/learn/latex/Tables
+%% Produces a simple two-column table w/ multiple rows
+\begingroup
+\begin{table} [ht]
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c c} 
+\hline \hline
+\textbf{Header 1} & \textbf{Header 2} \\
+\hline \hline
+ & \\
+ & \\
+ & \\
+\hline
+\end{tabular}
+\caption{some-caption}
+\end{center}
+\end{table}
+\endgroup
+
+%% Double minipage half the size of the page
+\begin{minipage}[t]{0.5\textwidth}
+	\begin{flushleft}
+        \\
+        \\
+	\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}[t]{0.5\textwidth}
+	\begin{flushleft}
+        \\
+        \\
+	\end{flushleft}
+\end{minipage}
+\end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE AND AUTHOR %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\vspace{-0.75in}\large{Report title goes here}}
+\author[]{Author name\footnote{Contact: author  \texttt{(author-email)}}} 
+\affil[]{Author affiliation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% END TITLE AND AUTHOR %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT BEGINS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\date{}
+\maketitle
+\vspace{-0.5cm} \hrule
+
+
+\setcounter{page}{1}
+\section{Introduction}
+
+
+\section{Literature review}
+
+
+
+\section{Methodology}
+
+
+
+\section{Results}
+
+
+
+\section{Discussion}
+
+
+
+
+\section*{Bibliographic references}
+\addcontentsline{toc}{section}{Bibliographic references}
+% \printbibliography[notcategory=fullcited,heading=none]
+%% uncomment the above line
+
+
+
+\end{document}
