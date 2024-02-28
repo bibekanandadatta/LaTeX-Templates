@@ -1,2 +1,13 @@
 # LaTeX-Templates
- Collection of personal LaTeX templates for academic purposes
+ Collection of personal LaTeX templates for academic purposes. The collection contains a few directories (descriptions are given below). Users are welcome to clone/ fork/ download these templates. The templates were generated on Overleaf and compiled with `pdflatex`. I highly recommend using the templates in Overleaf. In case, you would like to do it locally, you may need to have all the necessary packages installed for error-free compilation.
+
+If you are new to using LaTeX, these templates may be a bit overwhelming to you. I highly suggest going through the main files before using them. I generously commented on different sections of the scripts. You are welcome to customize the templates to use for other purposes.
+
+
+## Description of the source code directories
+
+- `article`: This is based on the LaTeX article class with the necessary packages to write a small to decent size article (up to a few 10s of pages). Users can add more packages and define more macros based on their needs. I use this template regularly for scientific writing.
+- `homework`: This is almost identical to the `article` template with some minor changes to be used for homework. Same as the previous one, it can be used for versatile purposes.
+- `report`: This is based on the LaTeX report class. This template can be used to create large technical reports containing multiple chapters. The directory contains a main file that includes all the preamble, macros, and formatting information with other necessary files dedicated to each chapter of the report. The preamble and formatting of this document are slightly more involved than the `article` template.
+- `dissertation-proposal`: This template is also based on the LaTeX article class but was created for writing the dissertation proposal in my current institution. The department does not provide any specific format, so I did the formatting myself and appeared to be accepted by the committee members. If you are using this template, make sure to check with your advisor and committee member about the formatting. I also included a separate file for writing responses to your committee which can be used for writing rebuttals to any scientific article as well.
+- `dissertation-jhu`: This is somewhat identical to the `report` template, but adheres to follow the guidelines provided by the Johns Hopkins library. The original template was created in 2007 and updated multiple times in the past decade. I reorganized and customized the template to my preferences. At any time, if you are using this template, please make sure to check the guidelines provided by the university.
