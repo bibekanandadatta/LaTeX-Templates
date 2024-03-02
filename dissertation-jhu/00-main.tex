@@ -3,7 +3,7 @@
 % Updated by Brian D. Weitzner on April 29, 2014 
 % Updated by John Muschelli on January 29, 2016 
 % Updated by Leonardo Collado Torres on April 13, 2016 
-% Updated by John Clayton in December, 2019
+% Updated by John Clayton in December 2019
 % Updated by Bibekananda Datta in February, 2024
 
 
@@ -39,7 +39,11 @@
 \usepackage[titletoc]{appendix}
 
 \usepackage[american]{babel}
+
 \usepackage[natbib, backend=biber, style=apa, doi=true]{biblatex}
+% \usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
+
+
 \usepackage{blindtext}
 
 \usepackage{calc}
@@ -277,6 +281,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%% SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\COMMENT}{\textcolor{red}}
 \newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
 \newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
@@ -286,6 +291,19 @@
 
 
 %%%%%%%%%%%%%%%%%%%% END SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+\DeclareBibliographyCategory{fullcited}
+\newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
