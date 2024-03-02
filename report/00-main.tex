@@ -20,7 +20,9 @@
 \usepackage[ruled]{algorithm2e} %algorithm package
 \usepackage[titletoc]{appendix}
 \usepackage[american]{babel}
-\usepackage[natbib, backend=biber, style=apa, doi=true]{biblatex}
+% \usepackage[natbib, backend=biber, style=apa, doi=true]{biblatex}
+\usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
+
 \usepackage{blindtext}
 
 \usepackage{calc}
@@ -211,8 +213,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% margin settings required by JH library (geometry package)
-\geometry{letterpaper, top= 1.25 in, bottom= 1.25 in, left= 1 in, right= 1 in, includehead, headheight=30pt, headsep=10pt}
+
+\geometry{letterpaper, top= 1.20 in, bottom= 1.0 in, left= 1 in, right= 1 in, includehead, headheight=30pt, headsep=10pt}
 
 
 %% Sets paragraph (and not title) spacing, roughly speaking
@@ -223,6 +225,7 @@
 
 
 %%%% using titlesec package for sections, subsection .. heading format
+
 \titleformat*{\section}{\large\bfseries}
 \titleformat*{\subsection}{\normalsize\bfseries}
 \titleformat*{\subsubsection}{\normalsize\itshape}
@@ -319,10 +322,10 @@ aboveskip=0.5cm}
 %%%%%%%%%%%%%%%%%%%%%% SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% for basic commenting purposes (you can add more)
-\newcommand{\redtext}{\textcolor{red}}
-\newcommand{\ADDCITATION}{\redtext{(ADD CITATION)}}
-\newcommand{\ADDFIGURE}{\redtext{(ADD FIGURE)}}
-\newcommand{\ADDTABLE}{\redtext{(ADD TABLE)}}
+\newcommand{\COMMENT}{\textcolor{red}}
+\newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
+\newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
+\newcommand{\ADDTABLE}{\COMMENT{(ADD TABLE)}}
 
 %% to add quotes
 \newcommand{\say}[2]{\hfill\small\enquote{\textit{#1}}{ - \small\textsc{#2}.}}
@@ -330,6 +333,14 @@ aboveskip=0.5cm}
 %% you can use other packages for more complicated review and comment section
 
 %%%%%%%%%%%%%%%%%%%% END SIMPLE COMMENT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+\DeclareBibliographyCategory{fullcited}
+\newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
