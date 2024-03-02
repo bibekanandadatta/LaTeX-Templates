@@ -1,6 +1,6 @@
 # JHU Dissertation Template
 
-This is an unofficial Johns Hopkins dissertation template with recent updates by Bibekananda Datta. As of February 2024, the template follows the dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library] (https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). Be sure to check it before you proceed any further.
+This is an unofficial Johns Hopkins dissertation template with recent updates by Bibekananda Datta. As of February 2024, the template follows the dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). Be sure to check it before you proceed any further.
 
 
 ## History of the template
