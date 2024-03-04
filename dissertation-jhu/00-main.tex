@@ -8,10 +8,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% This is an unofficial Johns Hopkins dissertation template. As of February 2024,
-% the template follows the dissertation formatting requirements provided by the 
-% Johns Hopkins University Sheridan Library.
-% Check the requirement here: https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/
+
+% This is an unofficial dissertation template for Johns Hopkins University.
+% As of February 2024, the template follows the dissertation formatting 
+% requirements provided by the  Johns Hopkins University Sheridan Library.
+% It is the user's responsibility to ensure that the current requirements are 
+% followed: https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VERSION HISTORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +34,7 @@
 % Modularized all the settings, formatting, and macros. You can add more as needed.
 % Added specific settings for adding epigraphs before or after the chapter heading.
 % Added settings to control the white space from the top of the chapter to the chapter heading.
-% Added header option for each chapter. Will add a short header option for a larger chapter name.
+% Added header option for each chapter. 
 % Updated the appearance of table of contents, list of figures, and list of tables.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,15 +43,20 @@
 
 %%%%%%%%%%% list of variables for different formatting settings %%%%%%%%%%%%%%%%
 
+% if you do not like the white space on top of the chapter, change \ChapterTopSpace to a negative value
+
 \def\ChapterTopSpace{0}             % white space on top of the chapter heading
 \def\ChapterToTitle{-12}            % space between chapter to title
-\def\TitleToText{24}                % space between the chapter title to the following text
+\def\TitleToText{24}                % space between the chapter title to the following text (unit is pt)
 \def\GlobalTableSpacing{1.5}        % global spacing parameter for table (double spaced)
 \def\ParagraphSpacing{\baselineskip}% spacing between paragraph
 \def\ParagraphIndent{0}             % indentation at the beginning of the paragraph
 \def\BibItemSpacing{\baselineskip}  % spacing between bibliographic items in reference
-\def\TocLevel{3}                    % no of levels showed in the table of contents
-\def\SecLevel{3}                    % no of levels for sections ... to subsubsection
+\def\FootnoteSpacing{0.75\baselineskip} % spacing between footnotes
+\def\CaptionSpacing{0}              % spacing between the figure and the caption (unit: pt)
+\def\NoTocLevel{3}                  % no of levels showed in the table of contents
+\def\NoSectionLevel{3}              % no of levels for sections ... to subsubsection
+
 
 
 \def\FontPackage{lmodern}           % latin modern font (you can also change it to times)
@@ -58,7 +65,7 @@
 
 %%%%%%%%%%%%%%%% JH Library-specific settings for PDF/A %%%%%%%%%%%%%%%%%
 
-% PDF Creation settings (required for JH library)
+%% PDF Creation settings (required for JH library)
 
 \pdfcompresslevel=9
 \pdfminorversion=5
@@ -149,8 +156,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS FOR TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%% TOC shows (chapter to subsection) in the list
-\setcounter{tocdepth}{\TocLevel}
-\setcounter{secnumdepth}{\SecLevel}     % section to ... subsubsection
+\setcounter{tocdepth}{\NoTocLevel}
+\setcounter{secnumdepth}{\NoSectionLevel}     % section to ... subsubsection
 
 
 % dots for chapters too
@@ -292,6 +299,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% if you have a long chapter title you may need to customize the header settings here
+
 %% margin settings required by JH library (geometry package)
 \geometry{letterpaper, left=1.5in, right=1.0in, top=1.0in, bottom=1.0in, includehead, headheight=30pt, headsep=10pt}
 
@@ -307,14 +316,17 @@
 \setlength{\parskip}{\ParagraphSpacing}             % paragraph skip
 \setlength{\parindent}{\ParagraphIndent pt}         % paragraph indentation
 \setlength{\bibitemsep}{\BibItemSpacing}            % bib item separation 
+\setlength{\footnotesep}{\FootnoteSpacing}          % separation between footnote
+\captionsetup{belowskip=\CaptionSpacing pt}         % space between figure and caption
 
 
-%% settings for hyperref package
+%% settings for the hyperref package
 \hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
 
 
 %% settings for listing package to include code
 \lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -359,8 +371,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+\AtBeginBibliography{\urlstyle{rm}}
 \DeclareBibliographyCategory{fullcited}
 \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -382,9 +396,13 @@
 
 
 %% choice a font form (or add something else) for your thesis (uncomment one option)
-\usepackage{\FontPackage}       % latin modern roman
+\usepackage{\FontPackage}       
 % if you want to use Palatino font, use the following and comment above line
 %\usepackage[sc]{mathpazo}      % palatino font family
+
+
+%% may be useful during drafting
+% \linenumbers
 
 %%%%%%%%%%%%%%%%%%%%%%%%% END BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -406,7 +424,8 @@
 \include{01-title}              % title page
 
 
-% header and page numbering set up
+%% chapter header and page numbering set up
+%% if you want to remove the headers, comment following 4 lines
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
 \fancyhead[R]{}
@@ -422,7 +441,7 @@
 \include{04-acknowledgment}
 
 
-\onehalfspacing                 % one half spacing for table of contents
+\onehalfspacing                 % one-half spacing for the table of contents
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
 \listoftables
@@ -460,16 +479,24 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACK MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\singlespacing
+\singlespacing  % single spacing for the bib items (otherwise it looks too spread out)
+%% if you want to remove the headers, comment following 2 lines
 \markboth{Bibliographic references}{}
 \fancyhead[L]{\leftmark}
+
 \include{10-references}
 
 
-\doublespacing
+
+
+\doublespacing  % restoring double spacing for the contents in appendices
 \fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
+%% if you want to remove the headers, comment out the above line
+
 \include{11-appendix-A}
 \include{12-appendix-B}
+
+%% add more appendix chapters as you need
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END BACK MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
