@@ -36,15 +36,15 @@ Please read the following suggestions before you start using the template:
 
 - Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed.
 - The bibliography file is based on BibLaTeX which is a more modern package compared to BibTeX and natbib. Use Zotero (this is what I use) or some other citation manager to generate a standard BibLaTeX file.
-- If your file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
-- Current `apa` and `nature` style options are there for bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as IEEE or something else. Find where the BibLaTeX package is added to the document and customize the options.
+- If your bib file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
+- Currently `apa` and `nature` style options are there for bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as `IEEE` or something else. Find where the BibLaTeX package is added to the document and customize the options.
 - Add all the figures in the `figures` subdirectory. You can add chapter-wise pdf files (which I prefer) or just add all of them as you have them.
 - Decide if you will include any quote at the beginning of a chapter. If so, will it be placed before or after the chapter heading?
   - If you add a quote before the chapter heading, then all of your chapters will have some additional white space as it has now. (see, Chapter 2)
   - If you are using a quote after the chapter heading then you may want to reduce the white space before this. I like more compact formatting. (see, Chapter 3)
 - For unnumbered chapters that you want to add to the table of contents, use the `\chap` command instead of the `\chapter*` command.
-- Similarly for unnumbered sections, subsections, and subsubsections that you would like to add to the table of contents, use \sect, \subsect, and \subsubsect commands.
-- Tables are defined to have \arraystretch=1.5 (equivalent to double space), but if you would like to customize it globally throughout the document, you can try decreasing/ increasing it. I suggest doing it locally by defining a group for each table (StackOverflow is your friend here).
+- Similarly for unnumbered sections, subsections, and subsubsections that you would like to add to the table of contents, use `\sect`, `\subsect`, and `\subsubsect` commands.
+- Tables are defined to have `\arraystretch{1.5}` (equivalent to double space), but if you would like to customize it globally throughout the document, you can try decreasing/ increasing it. I suggest doing it locally by defining a group for each table (StackOverflow is your friend here).
 - If the table is wider than the page, you may want to use the landscape tables which are placed sideways and may go over multiple pages (search online; someone on StackOverflow has done it).
 - If the chapter name is too long, you may have to customize the header spacing in the geometry settings options to accommodate that. If it gets difficult to customize, you may want to remove all the header options. In the future, I plan on adding a short header option for long chapter names.
 - Add more packages, customized macros, or maybe more chapters as needed. Happy Graduation!
