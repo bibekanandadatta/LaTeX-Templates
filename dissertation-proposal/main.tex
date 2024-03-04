@@ -52,13 +52,14 @@
 \usepackage[english]{babel}		% for other languages
 \usepackage{blindtext}
 
-% bibliographic package
-% make sure your bib file is in BibLaTeX format 
-% (use Zotero or some other reference manager to generate the BibLaTeX file)
-\usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
-% change the style or other options as needed
 
-\usepackage[font=small,labelfont=bf,labelsep=period]{caption}
+% bibliographic package (make sure your bib file is in BibLaTeX format)
+% use Zotero or some other reference manager to generate the BibLaTeX file
+% change the style or other options as needed
+\usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
+
+
+\usepackage{caption}
 
 \usepackage{color}
 \usepackage{csquotes}           % for quote envionrment
@@ -67,7 +68,7 @@
 \usepackage[T1]{fontenc}		% output
 \usepackage{geometry}		    % margin manipulation
 
-\usepackage{fancyhdr}
+\usepackage{fancyhdr}           % for headers and footers
 \usepackage[bottom]{footmisc}
 \usepackage{graphicx,wrapfig}   % for image  
 \usepackage{hyperref}
@@ -81,7 +82,7 @@
 \usepackage{seqsplit}
 \usepackage[rightcaption]{sidecap}
 \usepackage{soul}
-\usepackage{tocbasic,parskip}
+\usepackage{tocbasic}
 \usepackage{parskip}
 \usepackage{titlesec}
 %\usepackage{tocbibind}
@@ -101,6 +102,12 @@
 
 %% margin settings with geometry package
 \geometry{left=1.0in, right=1.0in, top=1.0in, bottom=1.0in}
+
+
+%% settings for the hyperref package
+\hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
+\urlstyle{rm}   % to remove the default URL style (tt format)
+
 
 %%% table of content, list of table, list of figure header setting with tocbasic
 \addtotoclist[\jobname]{toc}
@@ -132,23 +139,21 @@
 \singlespacing
 
 
+%% settings for figure caption
+\captionsetup{belowskip=\CaptionSpacing pt, font=small, labelfont=bf, labelsep=period, hypcap=true} 
+
 %% settings for bibliography
-\DeclareFieldFormat{titlecase}{#1}
 \AtBeginBibliography{\urlstyle{rm}}
-
-
-%% settings for the hyperref package
-\hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
-
-
-%% settings for biblatex bibliography
 \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \DeclareBibliographyCategory{fullcited}
 \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
 
 
-%% settings for figure caption
-\captionsetup{belowskip=\CaptionSpacing pt}
+
+%% settings for biblatex bibliography
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTINGS %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -231,7 +236,7 @@
     Doctoral dissertation proposal submitted to the \\
     Department of Mechanical Engineering of The Johns Hopkins University \\
     
-    \vspace{0.75in}
+    \vspace{0.65in}
 
     \MakeUppercase{\textbf{LOREM IPSUM DOLOR SIT AMET\\CONSECTETUER ADIPISCING ELIT}}       %% tentative thesis title
     
@@ -240,12 +245,10 @@
     Author name   % AUTHOR (student) NAME
 \end{center}
 
-\vspace{0.75in}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMITTEE MEMBERS %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{0.75in}
 % if you have more people on your committee then squeeze out some spaces or use the minipage feature
 \begin{singlespace}
 
@@ -271,7 +274,7 @@
 \end{singlespace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% TIME AND LOCATION %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{1in}
+\vspace{0.75in}
 \begin{center}
     Baltimore, Maryland \\  % Location
     Month YEAR              % Like May 2023
@@ -306,16 +309,16 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\onehalfspacing
+\onehalfspacing             % one half spacing for the table of contents
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
 
 \newpage
-\listoftables
+\listoffigures
 
 
 \newpage
-\listoffigures
+\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% END FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -325,7 +328,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
-\singlespacing
+\singlespacing              % single spacing for the document
 \pagenumbering{arabic}
 
 
@@ -333,7 +336,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUND %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Background and significance}    %% 2 page limit
+\section{Background and significance}           %% 2 page limit 
 
 \blindtext \cite{dirac}.
 
@@ -354,7 +357,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJECTIVES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Research objectives}       %% 1 page limit
+\section{Research objectives}                   %% 1 page limit
 
 \blindtext
 
@@ -373,7 +376,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%% METHODOLOGY AND RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Proposed methodology and results} %% 4 page limit
+\section{Proposed methodology and results}  %% 4 page limit
 
 \subsection{Task 1: Major project task heading here related to objective 1}
 
@@ -397,12 +400,9 @@
 \section{Planned publications}
 
 \begin{enumerate} [leftmargin=0.75cm,itemsep=0pt]
-    %
     \item \fullcite{einstein}.
-    \item % \fullcite{add_the_biblatex_tag}.
     \item \fullcite{knuth-fa}. \hfill (In preparation)
-    \item % \fullcite{add_the_biblatex_tag}. \hfill (In preparation)
-    %% add more items if you
+    %% add more items (if you have published/ planned for more papers)
 \end{enumerate}
 
 
