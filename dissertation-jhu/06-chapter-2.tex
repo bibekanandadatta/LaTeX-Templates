@@ -3,18 +3,21 @@
 % if you want a short header you can use the following command
 % \chapter[short-header-name]{chapter-title} \label{chap:chap-2}
 
-% epigraph before chapter heading
-\epigraphhead[0]{\epigraph{\enquote{Do not believe everything you see on the internet}}{-- Albert Einstein}}
 
-% remove the following and add your chapter text
-\blindtext 
+\epigraph{\enquote{Do not believe everything you see on the internet.}}{-- Albert Einstein}
 
-\begin{figure}[ht]
-\begin{center}
-    \includegraphics[width=\textwidth, trim={6cm 5cm 6cm 5cm},clip,page=1] {chap2.pdf}
-    \caption{Here are some photos of ducks to make you feel happy in tough times.}
-    \label{fig:ducks}
-\end{center}
-\end{figure}
+% if you want to add the quote above the chapter heading then do the following:
+% (for this case, you may have to change \ChapterTopSpace in the main file)
+% \epigraphhead[0]{whole-above-epigraph-goes-here}
 
-\blindtext[2]       % generates a single paragraph of double size
+
+% add the citation for the chapter if it is a reprint
+This chapter is adapted from the following publication with permission from \emph{publisher}: 
+\begin{spacing}{\FullCiteSpacing}
+    \fullcite{dirac}. 
+\end{spacing}
+
+
+% add your chapter text here
+\section{Introduction}
+\Blindtext[3]

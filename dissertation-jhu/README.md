@@ -13,7 +13,7 @@ Johns Hopkins Library is flexible in terms of the format except for the title pa
 - Updated by John Muschelli on January 29, 2016 
 - Updated by Leonardo Collado Torres on April 13, 2016 
 - Updated by John Clayton in December 2019
-- The current version is updated by Bibekananda Datta in February 2024
+- The current version is updated by Bibekananda Datta on March 04, 2024
 
 
 
@@ -34,17 +34,18 @@ Since the template is based on the report class, it is subdivided into multiple 
 
 Please read the following suggestions before you start using the template:
 
-- Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed.
+- Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed to customize the dissertation formatting.
+- Most of the common settings are available in the `Document Formatting` and `Basic Settings` section in the main file. You can find the settings for `geometry`, `hyperref`, `caption`, `bibliography`, and `section titles`, etc in these two sections.
+- Add your math macros and settings in the `Math Settings and Macros` section.
+- Additional settings related to chapters and epigraphs are separately available but a little bit more complicated.
 - The bibliography file is based on BibLaTeX which is a more modern package compared to BibTeX and natbib. Use Zotero (this is what I use) or some other citation manager to generate a standard BibLaTeX file.
-- If your file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
-- Current `apa` and `nature` style options are there for bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as IEEE or something else. Find where the BibLaTeX package is added to the document and customize the options.
-- Add all the figures in the `figures` subdirectory. You can add chapter-wise pdf files (which I prefer) or just add all of them as you have them.
-- Decide if you will include any quote at the beginning of a chapter. If so, will it be placed before or after the chapter heading?
-  - If you add a quote before the chapter heading, then all of your chapters will have some additional white space as it has now. (see, Chapter 2)
-  - If you are using a quote after the chapter heading then you may want to reduce the white space before this. I like more compact formatting. (see, Chapter 3)
+- If your bib file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
+- Current `apa` (author-year format) and `nature` (numbered format) style options are there for the bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as IEEE, MLA, Harvard, Chicago, etc. Find where the BibLaTeX package is added to the document and customize the options for the bibliographic package.
+- Add all the figures in the `figures` subdirectory. You can add chapter-wise PDF files (which is what I prefer) or just add all of them as you have them.
+- If you add a quote before the chapter heading, then you may want to increase the white spacing on top and all of your chapters will have some additional white space.
 - For unnumbered chapters that you want to add to the table of contents, use the `\chap` command instead of the `\chapter*` command.
-- Similarly for unnumbered sections, subsections, and subsubsections that you would like to add to the table of contents, use \sect, \subsect, and \subsubsect commands.
-- Tables are defined to have \arraystretch=1.5 (equivalent to double space), but if you would like to customize it globally throughout the document, you can try decreasing/ increasing it. I suggest doing it locally by defining a group for each table (StackOverflow is your friend here).
-- If the table is wider than the page, you may want to use the landscape tables which are placed sideways and may go over multiple pages (search online; someone on StackOverflow has done it).
+- Similarly, for unnumbered sections, subsections, and subsubsections that you would like to add to the table of contents, use `\sect`, `\subsect`, and `\subsubsect` commands.
+- Tables are defined to have `\arraystretch{1.5}` (equivalent to double space). If you would like to customize it globally throughout the document, you can try decreasing/ increasing it. I suggest doing it locally by defining a group for each table (StackExhange or StackOverflow is your friend here) where you can redefine `\arraystretch` for the individual tables as needed.
+- If the table is wider than the page, you may want to use the landscape tables which are placed sideways and may go over multiple pages (someone on StackExhange or StackOverflow has done it for sure).
 - If the chapter name is too long, you may have to customize the header spacing in the geometry settings options to accommodate that. Alternatively, you can use it with a short header option. But if it gets difficult to customize, you may want to remove all the header options.
 - Add more packages, customized macros, or maybe more chapters as needed. Happy Graduation!

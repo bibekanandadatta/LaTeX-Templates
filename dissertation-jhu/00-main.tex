@@ -1,13 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                          AUTHOR: BIBEKANANDA DATTA                         %%
-%%                              (C) FEBRUARY 2024                             %%
-%%                      PHD STUDENT, MECHANICAL ENGINEERING                   %%
+%%                               (C) MARCH 2024                               %%
+%%                      PhD STUDENT, MECHANICAL ENGINEERING                   %%
 %%                           JOHNS HOPKINS UNIVERSITY                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+%%             PLEASE FOLLOW THE README.MD FILE BEFORE YOU PROCEED           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % This is an unofficial dissertation template for Johns Hopkins University.
@@ -29,7 +29,7 @@
 % Updated by John Muschelli on January 29, 2016 
 % Updated by Leonardo Collado Torres on April 13, 2016 
 % Updated by John Clayton in December 2019
-% Updated by Bibekananda Datta in February, 2024
+% Updated by Bibekananda Datta on March 04, 2024
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VERSION HISTORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -55,12 +55,15 @@
 % if you do not like the white space on top of the chapter, 
 % change \ChapterTopSpace to a negative value.
 
-\def\ChapterTopSpace{0}             % white space on top of the chapter heading
+\def\ChapterTopSpace{-60}           % white space on top of the chapter heading
 \def\ChapterToTitle{-12}            % space between chapter to title
-\def\TitleToText{24}                % space between the chapter title to the following text (unit: pt)
+\def\TitleToText{18}                % space between the chapter title to the following text
+\def\TocIndent{0}                   % indentation in the list of figs and tables
+\def\QuoteWidth{0.65\textwidth}     % width of quote in epigraph
 \def\GlobalTableSpacing{1.5}        % global spacing parameter for table (double spaced)
 \def\ParagraphSpacing{\baselineskip}% spacing between paragraph
 \def\ParagraphIndent{0}             % indentation at the beginning of the paragraph
+\def\FullCiteSpacing{1.25}          % spacing in a fullcite item
 \def\BibItemSpacing{\baselineskip}  % spacing between bibliographic items in reference
 \def\FootnoteSpacing{0.75\baselineskip} % spacing between footnotes
 \def\CaptionSpacing{0}              % spacing between the figure and the caption (unit: pt)
@@ -76,7 +79,6 @@
 %%%%%%%%%%%%%%%% JH Library-specific settings for PDF/A %%%%%%%%%%%%%%%%%
 
 %% PDF Creation settings (required for JH library)
-
 \pdfcompresslevel=9
 \pdfminorversion=5
 \pdfobjcompresslevel=2
@@ -114,7 +116,7 @@
 \usepackage{blindtext}
 
 \usepackage{calc}
-\usepackage[font=small, labelfont=bf, labelsep=period,  hypcap=true]{caption}
+\usepackage{caption}
 \usepackage{color}
 \usepackage{epigraph,varwidth}
 \usepackage{enumitem}			%list environment
@@ -167,7 +169,10 @@
 
 %%%% TOC shows (chapter to subsection) in the list
 \setcounter{tocdepth}{\NoTocLevel}
-\setcounter{secnumdepth}{\NoSectionLevel}     % section to ... subsubsection
+\setcounter{secnumdepth}{\NoSectionLevel}       % section to ... subsubsection
+
+\setlength{\cftfigindent}{\TocIndent pt}        % remove indentation from figures in lof
+\setlength{\cfttabindent}{\TocIndent pt}        % remove indentation from tables in lot
 
 
 % dots for chapters too
@@ -196,6 +201,7 @@
 % removes 'Chapter #' title while keeping it listed in the TOC
 \newcommand\chap[1]{%
   \chapter*{#1}%
+  \markboth{#1}{}
   \addcontentsline{toc}{chapter}{#1}}
   
 % removes 'Section #' title while keeping it listed in the TOC
@@ -224,7 +230,7 @@
 %% if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to -(some_value)
 \makeatletter
 \def\@makechapterhead#1{%
-  \vspace*{\ChapterTopSpace \p@}            % white space from the top of the page to chapter #
+  \vspace*{\ChapterTopSpace \p@}   % white space before the chapter #
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
         \singlespacing \Large \bfseries \@chapapp\enskip \thechapter 
@@ -232,7 +238,7 @@
     \fi
         \interlinepenalty\@M
         \singlespacing \Large \bfseries #1\par\nobreak
-    \vskip \TitleToText \p@           % space between the chapter title and the following text
+    \vskip \TitleToText \p@         % space between the chapter title and the following text
   }}
 \makeatother
 
@@ -241,7 +247,7 @@
 % if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to - (some_value)
 \makeatletter
 \def\@makeschapterhead#1{%
-  \vspace*{\ChapterTopSpace \p@}           % white space from the top of the page to chapter title
+  \vspace*{\ChapterTopSpace \p@} % white space before to the chapter title
   {\parindent \z@ \raggedright
     \normalfont
     \interlinepenalty\@M
@@ -262,7 +268,7 @@
 % to be arbitrary to the epigraph length
 \renewcommand{\epigraphflush}{flushright}
 \renewcommand{\epigraphsize}{\small}
-\setlength{\epigraphwidth}{0.6\textwidth}
+\setlength{\epigraphwidth}{\QuoteWidth}
 \renewcommand{\textflush}{flushright}
 \renewcommand{\sourceflush}{flushright}
 % A useful addition
@@ -307,58 +313,6 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% if you have a long chapter title you may need to customize the header settings here
-
-%% margin settings required by JH library (geometry package)
-\geometry{letterpaper, left=1.5in, right=1.0in, top=1.0in, bottom=1.0in, includehead, headheight=30pt, headsep=10pt}
-
-
-%%%% using titlesec package for sections, subsection, ... heading format
-\titleformat*{\section}{\large\bfseries}
-\titleformat*{\subsection}{\normalsize\bfseries}
-\titleformat*{\subsubsection}{\normalsize\itshape}
-
-
-%% settings for paragraph (and not title) spacing, roughly speaking
-\renewcommand{\arraystretch}{\GlobalTableSpacing}   % spacing inside table
-\setlength{\parskip}{\ParagraphSpacing}             % paragraph skip
-\setlength{\parindent}{\ParagraphIndent pt}         % paragraph indentation
-\setlength{\bibitemsep}{\BibItemSpacing}            % bib item separation 
-\setlength{\footnotesep}{\FootnoteSpacing}          % separation between footnote
-\captionsetup{belowskip=\CaptionSpacing pt}         % space between figure and caption
-
-
-%% settings for the hyperref package
-\hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
-
-
-%% settings for listing package to include code
-\lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
-
-\allowdisplaybreaks[1]
-\numberwithin{equation}{chapter}        % eqn no with chapter prefix
-\newcommand{\dC}{$^{\circ}$C}           % degree celcius symbol
-\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
-\DeclareMathOperator{\tr}{tr}           % trace of a matrix
-\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
-\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
-
-%% these are just some examples; add more macros for your custom symbols
-
-%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 
 
@@ -378,17 +332,70 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% if you have a long chapter title you may need to customize the header settings here
+
+%% margin settings required by JH library (geometry package)
+\geometry{letterpaper, left=1.5in, right=1.0in, top=1.0in, bottom=1.0in, includehead, headheight=30pt, headsep=10pt, includefoot, heightrounded}
+
+
+%%%% using titlesec package for sections, subsection, ... heading format
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\itshape}
+
+
+%% settings for caption package (customize or add more as needed)
+\captionsetup{belowskip=\CaptionSpacing pt, font=small, labelfont=bf, labelsep=colon, hypcap=true} 
+
+
+%% settings for paragraph (and not title) spacing, roughly speaking
+\renewcommand{\arraystretch}{\GlobalTableSpacing}   % spacing inside table
+\setlength{\parskip}{\ParagraphSpacing}             % paragraph skip
+\setlength{\parindent}{\ParagraphIndent pt}         % paragraph indentation
+\setlength{\bibitemsep}{\BibItemSpacing}            % bib item separation 
+\setlength{\footnotesep}{\FootnoteSpacing}          % separation between footnote
+
+
+
+%% settings for the hyperref package
+\hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
+% add 'linktoc=all' option to the above list for making the items in the 
+% table of contents as clickable links
+
+
+
+%% settings for listing package to include code
+\lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true}
+
+
+
+%% bibliography package settings
 \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \AtBeginBibliography{\urlstyle{rm}}
 \DeclareBibliographyCategory{fullcited}
 \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\allowdisplaybreaks[1]
+\numberwithin{equation}{chapter}        % eqn no with chapter prefix
+\newcommand{\dC}{$^{\circ}$C}           % degree celcius symbol
+\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
+\DeclareMathOperator{\tr}{tr}           % trace of a matrix
+\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
+\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
+
+%% these are just some examples; add more macros for your custom symbols
+
+%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -437,15 +444,14 @@
 %% chapter header and page numbering set up
 %% if you want to remove the headers, comment following 4 lines
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
-\fancyhead[R]{}
-\fancyhead[L]{\nouppercase \leftmark}
+\fancyhead[R]{}                         % empty top-right header throughout the document
+\fancyhead[L]{\nouppercase \leftmark}   % avoiding upper-case in header
 \pagenumbering{roman}
 \setcounter{page}{2}
 \doublespacing
 
 
-% Add abstract, dedication, and acknowledgment
+% add abstract, dedication, and acknowledgment
 \include{02-abstract}
 \include{03-dedication}
 \include{04-acknowledgment}
@@ -465,15 +471,18 @@
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 \pagenumbering{arabic}
-\fancyhead[L]{\chaptername\ \thechapter. \nouppercase \leftmark}
 \doublespacing          % restore double spacing in chapter contents
 
+%% full header for the numbered chapters (to remove header comment the following lines)
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\fancyhead[L]{\chaptername\ \thechapter. \nouppercase \leftmark}
 
+
+%% include all the main chapters
 \include{05-chapter-1}
 \include{06-chapter-2}
 \include{07-chapter-3}
@@ -488,20 +497,20 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACK MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% references
 \clearpage
 \singlespacing  % single spacing for the bib items (otherwise it looks too spread out)
-%% if you want to remove the headers, comment following 2 lines
-\markboth{Bibliographic references}{}
-\fancyhead[L]{\leftmark}
+% unnumbered header (to remove the headers, comment out the following line)
+\fancyhead[L]{\nouppercase \leftmark}
 
 \include{10-references}
 
 
-
-
+%% appendices
 \doublespacing  % restoring double spacing for the contents in appendices
+%% if you want to remove the headers, comment out the following line
 \fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
-%% if you want to remove the headers, comment out the above line
 
 \include{11-appendix-A}
 \include{12-appendix-B}
