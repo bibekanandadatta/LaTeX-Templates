@@ -23,20 +23,31 @@
 
 \documentclass[12pt]{article}
 
+%% if possible, make all of your changes here in the variable definition before
+%% tweaking original settings down below which could be little more involved.
+
 \baselineskip=12pt
+\def\NoTocLevel{3}                  % no of levels showed in the table of contents
+\def\NoSectionLevel{4}              % no of levels for sections ... to subsubsection
+
+\def\SectionFont{\bfseries\large}   % font for section heading
+\def\SubsectionFont{\bfseries\normalsize}        % font for subsection heading
+\def\SubsubsectionFont{\itshape\normalsize}      % font for subsubsection heading
+
 \def\GlobalTableSpacing{1.2}        % global spacing parameter for table (double spaced)
+
 \def\ParagraphSpacing{\baselineskip}% spacing between paragraph
 \def\ParagraphIndent{0}             % indentation at the beginning of the paragraph
 \def\BibItemSpacing{\baselineskip}  % spacing between bibliographic items in reference
 \def\FootnoteSpacing{0.75\baselineskip} % spacing between footnotes
 \def\CaptionSpacing{0}              % spacing between the figure and the caption (unit: pt)
-\def\NoTocLevel{3}                  % no of levels showed in the table of contents
-\def\NoSectionLevel{3}              % no of levels for sections ... to subsubsection
 
+\def\CaptionFontSize{small}         % size of caption font
+\def\CaptionFontType{bf}            % boldface caption tag
+\def\CaptionSeparator{period}       % you can change it to 'colon' as well
 
 \def\FontPackage{lmodern}           % latin modern font (you can also change it to times)
 \def\BibFileName{references.bib}    % name of BibLaTeX file with all the bibliography
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -100,6 +111,16 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% choice a font form (or add something else) for your thesis (uncomment one option)
+\usepackage{\FontPackage}       
+% if you want to use Palatino font, use the following and comment above line
+%\usepackage[sc]{mathpazo}      % palatino font family
+
+
+%% I use Zotero to generate the BibLaTeX file and include it in the same directory
+\addbibresource{\BibFileName}
+
+
 %% margin settings with geometry package
 \geometry{left=1.0in, right=1.0in, top=1.0in, bottom=1.0in}
 
@@ -107,6 +128,10 @@
 %% settings for the hyperref package
 \hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
 \urlstyle{rm}   % to remove the default URL style (tt format)
+
+
+%% settings for figure caption
+\captionsetup{belowskip=\CaptionSpacing pt, font=\CaptionFontSize, labelfont=\CaptionFontType, labelsep=\CaptionSeparator, hypcap=true} 
 
 
 %%% table of content, list of table, list of figure header setting with tocbasic
@@ -124,10 +149,9 @@
 
 %% formatting for the section, subsection, subsubsection, etc.
 \titleformat{\section}
-{\large\bfseries}{\thesection}{1em}{}[{\titlerule}]
-\titleformat*{\subsection}{\normalsize\bfseries}
-\titleformat*{\subsubsection}{\normalsize\itshape}
-
+{\SectionFont}{\thesection}{1em}{}[{\titlerule}]
+\titleformat*{\subsection}{\SubsectionFont}
+\titleformat*{\subsubsection}{\SubsubsectionFont}
 
 
 %% no indent with single paragraph spacing
@@ -136,23 +160,14 @@
 \setlength{\footnotesep}{\FootnoteSpacing}
 \setlength{\bibitemsep}{\BibItemSpacing}  %% bib item separation 
 \def\arraystretch{\GlobalTableSpacing}
-\singlespacing
 
 
-%% settings for figure caption
-\captionsetup{belowskip=\CaptionSpacing pt, font=small, labelfont=bf, labelsep=period, hypcap=true} 
 
 %% settings for bibliography
 \AtBeginBibliography{\urlstyle{rm}}
 \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \DeclareBibliographyCategory{fullcited}
 \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
-
-
-
-%% settings for biblatex bibliography
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTINGS %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,18 +179,15 @@
 
 %% Define math symbols and macros
 \allowdisplaybreaks[1]
+\setcounter{MaxMatrixCols}{20}
 \numberwithin{equation}{section}
-\newcommand{\dC}{$^{\circ}$C}
-\newcommand{\vect}[1]{\mathbf{#1}}
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\divg}{div}
-\DeclareMathOperator{\grad}{grad}
-\DeclareMathOperator{\curl}{curl}
-\DeclareMathOperator{\sym}{sym}
-\DeclareMathOperator{\skw}{skw}
+\newcommand{\dC}{$^{\circ}$C}           % degree celcius symbol
+\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
+\DeclareMathOperator{\tr}{tr}           % trace of a matrix
+\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
+\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
 
-
-%% these are just some examples. add more macros as you need
+%% these are just some examples. add more macros as you need.
 
 %%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -186,11 +198,9 @@
 %% for basic commenting purposes (you can add more)
 \newcommand{\COMMENT}{\textcolor{red}}
 \newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
-\newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
-\newcommand{\ADDTABLE}{\COMMENT{(ADD TABLE)}}
+%% you can add more macros in here
 
 %% you can use other packages for more complicated review and comment section
-
 
 %% to add quotes
 \newcommand{\say}[2]{\hfill\small\enquote{\textit{#1}}{ - \small\textsc{#2}.}}
@@ -199,35 +209,16 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%% BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% choice a font form (or add something else) for your thesis (uncomment one option)
-\usepackage{\FontPackage}       
-% if you want to use Palatino font, use the following and comment above line
-%\usepackage[sc]{mathpazo}      % palatino font family
 
 
-%% I use Zotero to generate the BibLaTeX file and include it in the same directory
-\addbibresource{\BibFileName}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% may be useful during drafting
 % \linenumbers
-
-%%%%%%%%%%%%%%%%%%%%%%%%% END BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 \vspace*{0.025in}
 \thispagestyle{empty}
@@ -246,8 +237,7 @@
 \end{center}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMITTEE MEMBERS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMITTEE MEMBERS %%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{0.75in}
 % if you have more people on your committee then squeeze out some spaces or use the minipage feature
 \begin{singlespace}
@@ -284,7 +274,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN ABSTRACT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -293,21 +283,14 @@
 \setcounter{page}{2}
 \addcontentsline{toc}{section}{Abstract}
 \section*{Abstract}
+
 \blindtext
-
 %% write your abstract here
-
-
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% END ABSTRACT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \onehalfspacing             % one half spacing for the table of contents
 \renewcommand{\contentsname}{Table of Contents}
@@ -444,6 +427,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
 \end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%

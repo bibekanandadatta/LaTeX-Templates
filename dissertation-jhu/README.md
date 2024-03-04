@@ -34,10 +34,10 @@ Since the template is based on the report class, it is subdivided into multiple 
 
 Please read the following suggestions before you start using the template:
 
-- Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed to customize the dissertation formatting.
-- Most of the common settings are available in the `Document Formatting` and `Basic Settings` section in the main file. You can find the settings for `geometry`, `hyperref`, `caption`, `bibliography`, and `section titles`, etc in these two sections.
-- Add your math macros and settings in the `Math Settings and Macros` section.
-- Additional settings related to chapters and epigraphs are separately available but a little bit more complicated.
+- Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed to customize the dissertation formatting there.
+- Most common packages are added in the `LaTeX Package` sections. Add your package in there.
+- Most of the common settings are available in the `Document Formatting` section in the main file. Additional settings related to the table of contents and epigraphs are separately available but a little bit more complicated.
+- Add your math macros and settings in the `Math Settings and Macros` section. 
 - The bibliography file is based on BibLaTeX which is a more modern package compared to BibTeX and natbib. Use Zotero (this is what I use) or some other citation manager to generate a standard BibLaTeX file.
 - If your bib file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
 - Current `apa` (author-year format) and `nature` (numbered format) style options are there for the bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as IEEE, MLA, Harvard, Chicago, etc. Find where the BibLaTeX package is added to the document and customize the options for the bibliographic package.
