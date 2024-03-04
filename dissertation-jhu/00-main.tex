@@ -8,9 +8,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%This is an unofficial Johns Hopkins dissertation template. As of February 2024, the template follows the dissertation formatting requirements provided by the Johns Hopkins University Sheridan Library (https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/)
+% This is an unofficial Johns Hopkins dissertation template. As of February 2024,
+% the template follows the dissertation formatting requirements provided by the 
+% Johns Hopkins University Sheridan Library.
+% Check the requirement here: https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/
 
-% The report-class-based template was created by R. Jacob Vogelstein in May, 2007
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VERSION HISTORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The report-class-based template was created by R. Jacob Vogelstein in May 2007
 % Updated by Noah J. Cowan on March 1, 2010
 % Updated by Brian D. Weitzner on April 29, 2014 
 % Updated by John Muschelli on January 29, 2016 
@@ -18,13 +24,42 @@
 % Updated by John Clayton in December 2019
 % Updated by Bibekananda Datta in February, 2024
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VERSION HISTORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% CURRENT VERSION INCLUDES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Reorganization of the necessary packages (you may need more) and their settings.
+% Modularized all the settings, formatting, and macros. You can add more as needed.
+% Added specific settings for adding epigraphs before or after the chapter heading.
+% Added settings to control the white space from the top of the chapter to the chapter heading.
+% Added header option for each chapter. Will add a short header option for a larger chapter name.
+% Updated the appearance of table of contents, list of figures, and list of tables.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{report}
 
+%%%%%%%%%%% list of variables for different formatting settings %%%%%%%%%%%%%%%%
+
+\def\ChapterTopSpace{0}             % white space on top of the chapter heading
+\def\ChapterToTitle{-12}            % space between chapter to title
+\def\TitleToText{24}                % space between the chapter title to the following text
+\def\GlobalTableSpacing{1.5}        % global spacing parameter for table (double spaced)
+\def\ParagraphSpacing{\baselineskip}% spacing between paragraph
+\def\ParagraphIndent{0}             % indentation at the beginning of the paragraph
+\def\BibItemSpacing{\baselineskip}  % spacing between bibliographic items in reference
+\def\TocLevel{3}                    % no of levels showed in the table of contents
+\def\SecLevel{3}                    % no of levels for sections ... to subsubsection
+
+
+\def\FontPackage{lmodern}           % latin modern font (you can also change it to times)
+\def\BibFileName{thesis.bib}        % name of BibLaTeX file with all the bibliography
+
 
 %%%%%%%%%%%%%%%% JH Library-specific settings for PDF/A %%%%%%%%%%%%%%%%%
+
 % PDF Creation settings (required for JH library)
+
 \pdfcompresslevel=9
 \pdfminorversion=5
 \pdfobjcompresslevel=2
@@ -33,29 +68,31 @@
 \usepackage[a-1b]{pdfx}
 \usepackage{pdfpages}
 \usepackage{pax}
+
 %%%%%%%%%%%%%%%% JH Library-specific settings for PDF/A %%%%%%%%%%%%%%%%%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% add more packages as you need (remember sometimes the order of the package matters)
+%% add packages as you need but remember sometimes the order of the packages matter
+
 \usepackage[utf8]{inputenc}	    %input
 \DeclareUnicodeCharacter{2212}{-}
 
 
-% math packages
+%% math packages
 \usepackage{amsfonts,amssymb,amsmath,amsthm,dsfont,mathtools,mathbbol,siunitx,upgreek,mathrsfs,cancel}
-\allowdisplaybreaks[1]
 \usepackage{autobreak}
 \usepackage[ruled]{algorithm2e} %algorithm package
 \usepackage[titletoc]{appendix}
-
 \usepackage[american]{babel}
 
-\usepackage[natbib, backend=biber, style=apa, doi=true]{biblatex}
-% \usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
 
+%% bibliography package (BibLaTeX)
+%% uncomment one of the following options based on what you'd like
+\usepackage[backend=biber, style=apa, url=false, doi=true]{biblatex}
+% \usepackage[backend=biber, style=nature, maxnames=9, date=year, isbn=false, url=false, doi=true]{biblatex}
 
 \usepackage{blindtext}
 
@@ -72,8 +109,7 @@
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage[pdfa]{hyperref}
-\usepackage[all]{hypcap}
-% For captions on the side of figures
+\usepackage[all]{hypcap}                    % for captions on the side of figures
 \usepackage{ifthen}
 \usepackage{lscape}
 \usepackage{lipsum}
@@ -81,13 +117,13 @@
 \usepackage{csquotes}                       % for quote environment
 
 
-\usepackage{listings}
-\lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true}
+\usepackage{listings}                       % to include codes
 % table related packages
 \usepackage{booktabs,longtable,makecell,multicol,multirow,tabularx,xltabular}
 %\usepackage[protrusion]{microtype}
 \usepackage{textcomp}
 \usepackage{sectsty}
+
 
 \usepackage{setspace}
 \usepackage{seqsplit}
@@ -112,48 +148,53 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS FOR TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%% TOC shows 3 levels (chapter to subsection) in the list
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{3}     % section to ... subsubsection
+%%%% TOC shows (chapter to subsection) in the list
+\setcounter{tocdepth}{\TocLevel}
+\setcounter{secnumdepth}{\SecLevel}     % section to ... subsubsection
 
 
-% Dots for chapters too
+% dots for chapters too
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 
-% Tweak to TOC to add 'chapter' to the chapter name instead of a number only
-% Set the width of the box based on the longest label name
+% tweak to TOC to add 'chapter' to the chapter name instead of a number only
+% set the width of the box based on the longest label name
 \renewcommand{\cftchappresnum}{\chaptername\space}
 \setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999~}}}
 
 
-% Tweak to TOC to add 'Figure' to the figure caption listing
-% To change the distance to the start of the figure title
+% tweak to TOC to add 'Figure' to the figure caption listing
+% to change the distance to the start of the figure title
 \renewcommand{\cftfigpresnum}{\bfseries Figure }
 \setlength{\cftfignumwidth}{\widthof{\textbf{Figure~99.999~}}}
 
-% Tweak to TOC to add 'Table' to the Table caption listing
-% To change the distance to the start of the figure title
+
+% tweak to TOC to add 'Table' to the Table caption listing
+% to change the distance to the start of the figure title
 \renewcommand{\cfttabpresnum}{\bfseries Table }
 \setlength{\cfttabnumwidth}{\widthof{\textbf{Table~99.100~}}}
 
 
 %%%% UNNUMBERED CHAPTERS, SECTION, and SUBSECTION COMMAND for ADDING to TOC
-% Removes 'Chapter #' title while keeping
-% it listed in the TOC
+% removes 'Chapter #' title while keeping it listed in the TOC
 \newcommand\chap[1]{%
   \chapter*{#1}%
   \addcontentsline{toc}{chapter}{#1}}
-% Removes 'Section #' title while keeping
-% it listed in the TOC
+  
+% removes 'Section #' title while keeping it listed in the TOC
 \newcommand\sect[1]{%
   \section*{#1}%
   \addcontentsline{toc}{section}{#1}}
-% Removes 'Subsection #'title while keeping
-% it listed in the TOC
+  
+% Removes 'Subsection #' title while keeping it listed in the TOC
 \newcommand\subsect[1]{%
   \subsection*{#1}%
   \addcontentsline{toc}{subsection}{#1}}
+
+% Removes 'Subsubsection #' title while keeping it listed in the TOC
+\newcommand\subsubsect[1]{%
+  \subsubsection*{#1}%
+  \addcontentsline{toc}{subsubsection}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% END SETTINGS FOR TOC %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -166,15 +207,15 @@
 %% if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to -(some_value)
 \makeatletter
 \def\@makechapterhead#1{%
-  \vspace*{0 \p@}            % space from the top of the page to chapter #
+  \vspace*{\ChapterTopSpace \p@}            % white space from the top of the page to chapter #
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
         \singlespacing \Large \bfseries \@chapapp\enskip \thechapter 
-        \\ \vspace{-12pt}   % space between chapter # and title
+        \\ \vspace{\ChapterToTitle \p@}   % space between chapter # and title
     \fi
         \interlinepenalty\@M
         \singlespacing \Large \bfseries #1\par\nobreak
-    \vskip 24 \p@           % space between the chapter title and the following text
+    \vskip \TitleToText \p@           % space between the chapter title and the following text
   }}
 \makeatother
 
@@ -183,12 +224,12 @@
 % if you use an epigraph after the chapter title then perhaps reduce the first \vspace* from 0 pt to - (some_value)
 \makeatletter
 \def\@makeschapterhead#1{%
-  \vspace*{0 \p@}           % space before the title
+  \vspace*{\ChapterTopSpace \p@}           % white space from the top of the page to chapter title
   {\parindent \z@ \raggedright
     \normalfont
     \interlinepenalty\@M
     \Large \singlespacing \bfseries  #1\par\nobreak
-    \vskip 24 \p@ % space after the title
+    \vskip \TitleToText \p@     % space between the chapter title and the following text
   }}
 \makeatother
 
@@ -252,24 +293,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% margin settings required by JH library (geometry package)
-\geometry{letterpaper, left=1.5in, right=1.0in, top=1in, bottom=1.0in, includehead, headheight=30pt, headsep=10pt}
+\geometry{letterpaper, left=1.5in, right=1.0in, top=1.0in, bottom=1.0in, includehead, headheight=30pt, headsep=10pt}
 
 
-%%%% using titlesec package for sections, subsection .. heading format
+%%%% using titlesec package for sections, subsection, ... heading format
 \titleformat*{\section}{\large\bfseries}
 \titleformat*{\subsection}{\normalsize\bfseries}
 \titleformat*{\subsubsection}{\normalsize\itshape}
 
 
 %% settings for paragraph (and not title) spacing, roughly speaking
-\renewcommand{\arraystretch}{1.5}       % spacing inside table
-\setlength{\parskip}{12pt}              % paragraph skip
-\setlength{\parindent}{0pt}             % paragraph indentation
-\setlength{\bibitemsep}{\baselineskip}  % bib item separation 
+\renewcommand{\arraystretch}{\GlobalTableSpacing}   % spacing inside table
+\setlength{\parskip}{\ParagraphSpacing}             % paragraph skip
+\setlength{\parindent}{\ParagraphIndent pt}         % paragraph indentation
+\setlength{\bibitemsep}{\BibItemSpacing}            % bib item separation 
 
 
 %% settings for hyperref package
 \hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
+
+
+%% settings for listing package to include code
+\lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true}
 
 %%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -279,13 +324,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
 
+\allowdisplaybreaks[1]
 \numberwithin{equation}{chapter}        % eqn no with chapter prefix
-\newcommand{\vect}[1]{\mathbf{#1}}
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\divg}{div}
-\DeclareMathOperator{\grad}{grad}
+\newcommand{\dC}{$^{\circ}$C}           % degree celcius symbol
+\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
+\DeclareMathOperator{\tr}{tr}           % trace of a matrix
+\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
+\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
 
-%% these are just some examples. add more macros as you need
+%% these are just some examples; add more macros for your custom symbols
 
 %%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -300,6 +347,7 @@
 \newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
 \newcommand{\ADDTABLE}{\COMMENT{(ADD TABLE)}}
 
+%% you can also add more simple comments here as you need
 %% you can use some other packages for more complicated review and comment section
 
 
@@ -323,21 +371,20 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% add all the images to that folder
+
+% add all the images to that folder for cleaner file management
 % you can add images in chapter-wise PDF format (my preference).
 \graphicspath{{figures/}}
 
 
-
 %% this file has to be in BibLaTeX format. Use Zotero or some other citation manager to generate the .bib file in BibLaTeX format.
-\addbibresource{thesis.bib}
+\addbibresource{\BibFileName}
 
 
-
-%% choice a font form (or add something else) for your thesis.
-\usepackage{lmodern}
-%\usepackage[sc]{mathpazo}
-%\usepackage{times}             %times new roman
+%% choice a font form (or add something else) for your thesis (uncomment one option)
+\usepackage{\FontPackage}       % latin modern roman
+% if you want to use Palatino font, use the following and comment above line
+%\usepackage[sc]{mathpazo}      % palatino font family
 
 %%%%%%%%%%%%%%%%%%%%%%%%% END BASIC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -359,7 +406,6 @@
 \include{01-title}              % title page
 
 
-
 % header and page numbering set up
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
@@ -375,7 +421,8 @@
 \include{03-dedication}
 \include{04-acknowledgment}
 
-\onehalfspacing
+
+\onehalfspacing                 % one half spacing for table of contents
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
 \listoftables
@@ -403,6 +450,8 @@
 \include{07-chapter-3}
 \include{08-chapter-4}
 \include{09-chapter-5}
+
+%% add more chapters as you need
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

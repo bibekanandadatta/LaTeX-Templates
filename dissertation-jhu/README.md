@@ -1,6 +1,8 @@
 # JHU Dissertation Template
 
-This is an unofficial Johns Hopkins dissertation template with recent updates by Bibekananda Datta. As of February 2024, the template follows the dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). Be sure to check it before you proceed any further.
+This is an unofficial Johns Hopkins dissertation template with recent updates by Bibekananda Datta. As of February 2024, the template follows the dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). 
+
+Johns Hopkins Library is flexible in terms of the format except for the title page, margins, and overall double-spaced content. Be sure to check it before you proceed any further. It is the user's responsibility to ensure all the formatting requirements are met.
 
 
 ## History of the template
@@ -17,7 +19,8 @@ This is an unofficial Johns Hopkins dissertation template with recent updates by
 
 ## What is included in the template
 
-Since the template is based on the report class, it is subdivided into multiple chapters. For all the front matters (mandatory or optional), technical chapters, and back matters (references and appendices), there are separate .tex files. The `00-main.tex` file is the driver or root file which includes all the preamble, document settings, package settings, and macros as needed. I would recommend going through the different sections of this file to understand what are the options available. Compared to the previous version of the thesis template, the current version includes the following
+Since the template is based on the report class, it is subdivided into multiple chapters. For all the front matters (mandatory or optional), technical chapters, and back matters (references and appendices), there are separate .tex files. The `00-main.tex` file is the driver or root file which includes all the preamble, document settings, package settings, and macros as needed. I would recommend going through the different sections of this file to understand what are the options available. Compared to the previous version of the thesis template, the current version includes the following:
+
 - Reorganization of the necessary packages (you may need more) and their settings.
 - Modularized all the settings, formatting, and macros. You can add more as needed.
 - Added specific settings for adding epigraphs before or after the chapter heading.
@@ -27,12 +30,21 @@ Since the template is based on the report class, it is subdivided into multiple 
 
 
 
-## How to use this template
+## Some useful comments and suggestions for using the template
 
-I personally highly recommend using [Overleaf](https://www.overleaf.com) for these projects. You can also do it locally on your computer. In that case, you may have to install a proper tex editor and tex compiler based on your system which is out-of-scope for now. I am assuming, you already have a tex system configured when you're using these templates (either on Overleaf or locally). Follow the following instructions
+Please read the following suggestions before you start using the template:
 
-- Clone the repository to a specific location on your local computer. Alternatively, you can download the .zip file for this project.
-- Once downloaded, unzip (if you downloaded) and navigate to the specific subdirectory.
-- Compress the specific subdirectory you are interested in. Head to Overleaf. Click on New Project > Upload Project and then upload the subdirectory you compressed before.
-- Alternatively, you can create a project on Overleaf and upload the files or subfolders directly to the project you created.
-- Your project should be ready now. You can rename the project and start working on it.
+- Some necessary variables to customize the formatting of the document are included at the beginning of the document. Understand what each variable does and change them as needed.
+- The bibliography file is based on BibLaTeX which is a more modern package compared to BibTeX and natbib. Use Zotero (this is what I use) or some other citation manager to generate a standard BibLaTeX file.
+- If your file name is different than the current file, then change it at the beginning of the document where all the variables are declared.
+- Current `apa` and `nature` style options are there for bibliography. Choose either of them or you can add something else depending on your field or department requirement or advisor's suggestion such as IEEE or something else. Find where the BibLaTeX package is added to the document and customize the options.
+- Add all the figures in the `figures` subdirectory. You can add chapter-wise pdf files (which I prefer) or just add all of them as you have them.
+- Decide if you will include any quote at the beginning of a chapter. If so, will it be placed before or after the chapter heading?
+  - If you add a quote before the chapter heading, then all of your chapters will have some additional white space as it has now. (see, Chapter 2)
+  - If you are using a quote after the chapter heading then you may want to reduce the white space before this. I like more compact formatting. (see, Chapter 3)
+- For unnumbered chapters that you want to add to the table of contents, use the `\chap` command instead of the `\chapter*` command.
+- Similarly for unnumbered sections, subsections, and subsubsections that you would like to add to the table of contents, use \sect, \subsect, and \subsubsect commands.
+- Tables are defined to have \arraystretch=1.5 (equivalent to double space), but if you would like to customize it globally throughout the document, you can try decreasing/ increasing it. I suggest doing it locally by defining a group for each table (StackOverflow is your friend here).
+- If the table is wider than the page, you may want to use the landscape tables which are placed sideways and may go over multiple pages (search online; someone on StackOverflow has done it).
+- If the chapter name is too long, you may have to customize the header spacing in the geometry settings options to accommodate that. If it gets difficult to customize, you may want to remove all the header options. In the future, I plan on adding a short header option for long chapter names.
+- Add more packages, customized macros, or maybe more chapters as needed. Happy Graduation!
