@@ -22,5 +22,4 @@ I personally highly recommend using [Overleaf](https://www.overleaf.com) for the
 ## Description of the source code directories
 
 - `article`: This is based on the LaTeX article class with the necessary packages to write a small to decent size article (up to a few 10s of pages). Users can add more packages and define more macros based on their needs. I use this template regularly for scientific writing.
-- `homework`: This is almost identical to the `article` template with some minor changes to be used for homework. Same as the previous one, it can be used for versatile purposes.
 - `report`: This is based on the LaTeX report class. This template can be used to create large technical reports containing multiple chapters. The directory contains a main file that includes all the preamble, macros, and formatting information with other necessary files dedicated to each chapter of the report. The preamble and formatting of this document are slightly more involved than the `article` template.
