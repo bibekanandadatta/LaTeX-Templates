@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%     SOME EXAMPLE ENVIRONMENTS    %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+
+%% Check out this tutorial for list: https://www.overleaf.com/learn/latex/Lists
+
+%% Produces an un-numbered list of items with 0.75 cm distance from the left margin with line spacing between items and top with diamond label
+\begin{itemize}[leftmargin=0.75cm, itemsep=-0.3cm, topsep=-0.3cm,label={$\bullet$}]
+    \item 
+    \item
+    \item
+\end{itemize}
+
+%% Produces numbered item lists
+\begin{enumerate}[leftmargin=0.75cm, itemsep=-0.3cm, topsep=-0.3cm]
+  \item 
+  \item 
+  \item 
+\end{enumerate}
+
+%% Produces a nested itemized list
+\begin{enumerate}
+    \item 
+    \item 
+        \begin{description}[topsep=5pt, style=multiline, leftmargin= 2.5cm, itemsep = 5pt]
+            \item [Research] 
+                \begin{itemize}
+                    \item 
+                    \item
+                \end{itemize}
+            \item [Academic]
+                \begin{enumerate}
+                    \item 
+                    \item
+                \end{enumerate}
+        \end{description}
+    \item 
+\end{enumerate}
+
+%% HIGHLY RECOMMENDED: Check out these tutorials for math: https://www.overleaf.com/learn/latex/Mathematics
+
+%% Produces numbered equations
+\begin{equation} \label{eq:some-name}
+    % some equation
+\end{equation}
+
+%% Produces a centered set of equations
+\begin{equation} \label{eq:some-name}
+    \begin{gathered}
+        % some equation \\
+        % next equation \\
+        % another equation
+    \end{gathered}
+\end{equation}
+
+%% Produces aligned multi-line equations (aligned along the & symbols)
+\begin{equation} \label{eq:some-name}
+    \begin{aligned}
+    % some & equation \\
+    % next & equation \\
+    % another & equation
+    \end{aligned}
+\end{equation}
+
+%% Adds figure of specific width (height is scaled but you can define height and angle as well)
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width= a cm] {filename.extension}
+    \caption{some-caption}
+    \label{fig:some-name}
+\end{center}
+\end{figure}
+
+%% Adds figure from a specific page of a pdf. It specifies the width (a) of the picture in the document and trims from the left bottom right top for b, c, d, e cm.
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width= a cm, trim={b cm c cm d cm e cm}, clip, page= f] {some-pdf.pdf}
+    \caption{some-caption}
+    \label{fig:some-name}
+\end{center}
+\end{figure}
+
+%% For the table, see the tutorial here: https://www.overleaf.com/learn/latex/Tables
+%% Produces a simple two-column table w/ multiple rows
+\begingroup
+\begin{table} [ht]
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c c} 
+\hline \hline
+\textbf{Header 1} & \textbf{Header 2} \\
+\hline \hline
+ & \\
+ & \\
+ & \\
+\hline
+\end{tabular}
+\caption{some-caption}
+\end{center}
+\end{table}
+\endgroup
+
+%% Double minipage half the size of the page
+\begin{minipage}[t]{0.5\textwidth}
+	\begin{flushleft}
+        \\
+        \\
+	\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}[t]{0.5\textwidth}
+	\begin{flushleft}
+        \\
+        \\
+	\end{flushleft}
+\end{minipage}
+\end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
