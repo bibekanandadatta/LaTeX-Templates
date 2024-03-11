@@ -9,6 +9,9 @@
 %%   GitHub repository: https://github.com/bibekananda-datta/LaTeX-Template   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% if possible, please make your formatting changes here through the variables 
+%% go through all the variables and understand what role they play in formatting
 %%%%%%%%%%%%%%%%%%%%%% LIST OF VARIABLES FOR FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%
 
 \def\FontPackage{lmodern}                   % latin modern font (you can also change it to times)
@@ -17,7 +20,7 @@
 \def\NoSectionLevel{3}                      % 3 levels for sections ... to subsubsection
 \def\TocIndent{0}                           % indentation in the list of figs and tables
 \def\NoTocLevel{3}                          % no of levels showed in the table of contents
-%% 3 levels mean section to subsubsection.. decrease if you want less to showup in TOC
+%% 3 levels mean section to subsubsection.. decrease if you want less to show in TOC
 
 % font format for section heading and title
 \def\SectionFont{\large\bfseries}           % section heading font format
@@ -40,6 +43,14 @@
 
 %%%%%%%%%%%%%%%%%%%% END LIST OF VARIABLES FOR FORMATTING %%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% add packages as needed but sometimes the order of the packages matters.
+%% I primarily tried to load the packages in alphabetical order unless or 
+%% based on their functionalities (all math/ table packages) unless there 
+%% is package-dependency, then I included packages in that order.
+%% you may get warnings/ errors for the order in which packages are included
+%% you may have to change the options in the biblatex package for the bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX CLASS AND PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{article}               % document class (article - 12 pt)
@@ -66,7 +77,6 @@
 \usepackage{calc}                           % to set arithmetic arguments for spacing
 \usepackage{caption}                        % to manage captions
 \usepackage{color}                          % color related packages
-\usepackage{comment}                        % package for comment environment
 \usepackage{csquotes,epigraph,varwidth}     % for managing quotes
 \usepackage{enumitem}                       % to manage list environment
 \usepackage{float}                          % to manage floating environment
@@ -101,38 +111,42 @@
 
 
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% choice a font form (or add something else) for your thesis (uncomment one option)
+%%% choice a font form (or add something else) for your thesis (uncomment one option)
 \usepackage{\FontPackage}       
 % if you want to use Palatino font, use the following and comment above line
-%\usepackage[sc]{mathpazo}      % palatino font family
+% \usepackage[sc]{mathpazo}                 % palatino font family
 
 
-%% I use Zotero to generate the BibLaTeX file and include it in the same directory
+%%% I use Zotero to generate the BibLaTeX file and include it in the same directory
 \addbibresource{\BibFileName}
 
 
-%% margin settings with geometry package
+%%% margin settings with geometry package
 \geometry{left=1.0in, right=1.0in, top=1.0in, bottom=1.0in}
 
 
-%% settings for the hyperref package
+%%% settings for the hyperref package
 \hypersetup{linktocpage, unicode, colorlinks=true, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
 \urlstyle{rm}   % to remove the default URL style (tt format)
 
 
-%% settings for figure caption
+%%% settings for figure caption
 \captionsetup{belowskip=\CaptionSpacing pt, font=\CaptionFontSize, labelfont=\CaptionFontType, labelsep=\CaptionSeparator, hypcap=true} 
 
 
-%%% table of content, list of table, list of figure header setting with tocbasic
-\addtotoclist[\jobname]{toc}
-\renewcommand \tableofcontents{\listoftoc[{\contentsname}]{toc}}
-\renewcommand*{\listoffigures}{\listoftoc[\listfigurename]{lof}}
-\renewcommand*{\listoftables}{\listoftoc[\listtablename]{lot}}
-\setuptoc{lof}{totoc}
-\setuptoc{lot}{totoc}
+%%% authblk title, author, and affiliation font size
+\renewcommand*{\Authfont}{\normalsize}
+\DefineFNsymbolsTM{otherfnsymbols}{%
+  \textdagger    \dagger             % author name will have a dagger symbol for the footnote
+}%
+\setfnsymbol{otherfnsymbols}
+\renewcommand\Affilfont{\itshape\small}
+\setlength{\affilsep}{1em}
 
 
 %% section, subsection, and subsubsection to appear in the TOC
@@ -144,75 +158,24 @@
 {\SectionFont}{\thesection}{1em}{}
 \titleformat*{\subsection}{\SubsectionFont}
 \titleformat*{\subsubsection}{\SubsubsectionFont}
-\titleformat{\paragraph}
-{\normalfont\normalsize}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 
-%% no indent with single paragraph spacing
-\setlength{\parskip}{\ParagraphSpacing}
-\setlength{\parindent}{\ParagraphIndent pt}
-\setlength{\footnotesep}{\FootnoteSpacing}
-\setlength{\bibitemsep}{\BibItemSpacing}  %% bib item separation 
-\def\arraystretch{\GlobalTableSpacing}
+%%%% paragraph, footnote, bib item, and table spacing
+\setlength{\parskip}{\ParagraphSpacing}     % paragraph spacing
+\setlength{\parindent}{\ParagraphIndent pt} % paragraph indentation
+\setlength{\footnotesep}{\FootnoteSpacing}  % footnote separation
+\setlength{\bibitemsep}{\BibItemSpacing}    % bib item separation 
+\def\arraystretch{\GlobalTableSpacing}      % spacing in table
 
 
-
-%% authblk title, author, and affiliation font size
-%% use symbols up to the same number of authors
-%% otherwise it will start showing up in the footnotes
-\renewcommand*{\Authfont}{\normalsize}
-\DefineFNsymbolsTM{otherfnsymbols}{%
-  \textdagger    \dagger
-  % \textdaggerdbl \ddagger
-  % \textsection   \mathsection
-}%
-\setfnsymbol{otherfnsymbols}
-\renewcommand\Affilfont{\itshape\small}
-\setlength{\affilsep}{1em}
-
-%% footnote settings
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-
-
-
-%% settings for bibliography
+%% bibliography settings
+\DeclareFieldFormat{titlecase}{#1}
 \AtBeginBibliography{\urlstyle{rm}}
-\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
-% \DeclareBibliographyCategory{fullcited}
-% \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
+
+
+\usetikzlibrary{positioning,shapes,arrows}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%% ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% settings for algorithm2e package
-\renewcommand{\algorithmcfname}{Procedure}
-\SetKwFor{While}{while}{}{end while}%
-\SetArgSty{textnormal}
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
-\SetCommentSty{mycommfont}
-
-
-%% listing package definition (to add code in the document)
-\usepackage{listings}
-\lstdefinestyle{terminal}{columns=fullflexible,
-keepspaces=true,
-breaklines=true,
-basicstyle={\footnotesize\fontfamily{fvm}\fontseries{m}\selectfont},
-keywordstyle={\footnotesize\fontfamily{fvm}\fontseries{b}\selectfont},
-commentstyle={\color{comments}\small\fontfamily{fvm}\itshape\selectfont},
-frame=single,
-xleftmargin=0in,
-backgroundcolor=\color{lightgray!50},
-belowcaptionskip=10pt,
-aboveskip=0.5cm}
-\lstset{style=terminal,float=h,language=bash}
-
-%%%%%%%%%%%%%%%%%%%% END ALGORITHM AND LISTING SETTINGS %%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -221,67 +184,35 @@ aboveskip=0.5cm}
 %% this is where LaTeX supremacy becomes a thing. you can customize a lot.
 %%%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%% Define math symbols and macros
 \allowdisplaybreaks[1]
-\setcounter{MaxMatrixCols}{20}
+\setcounter{MaxMatrixCols}{20}          % maximum columns in matrix = 20
+\numberwithin{equation}{section}        % eqn no begins with section no
+\newcommand{\dC}{$^{\circ}$C}           % degree celsius symbol
+\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
+\DeclareMathOperator{\tr}{tr}           % trace of a matrix
+\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
+\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
 
-% define math symbols
-\numberwithin{equation}{section}
-\newcommand{\dC}{$^{\circ}$C}
-\DeclareMathOperator{\R}{\mathrm{R}}
-\DeclareMathOperator{\T}{{\top}}
-\newcommand{\vect}[1]{\mathbf{#1}}
+%% these are just some examples; add more macros for your custom symbols
 
-\newcommand{\mat}[1]{\mathbf{#1}}
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\sym}{sym}
-\DeclareMathOperator{\skw}{skw}
-
-\DeclareMathOperator{\divg}{div}
-\DeclareMathOperator{\curl}{curl}
-\DeclareMathOperator{\grad}{grad}
-
-\DeclareMathOperator{\Divg}{Div}
-\DeclareMathOperator{\Grad}{Grad}
-\DeclareMathOperator{\Curl}{Curl}
-
-\DeclareMathOperator{\sgn}{sign}
-
-
-\DeclareMathOperator*{\Aop}{A}
-\makeatletter
-\DeclareRobustCommand\bigop[2][1]{%
-  \mathop{\vphantom{\sum}\mathpalette\bigop@{{#1}{#2}}}\slimits@
-}
-\newcommand{\bigop@}[2]{\bigop@@#1#2}
-\newcommand{\bigop@@}[3]{%
-  \vcenter{%
-    \sbox\z@{$#1\sum$}%
-    \hbox{\resizebox{\ifx#1\displaystyle#2\fi\dimexpr\ht\z@+\dp\z@}{!}{$\m@th#3$}}%
-  }%
-}
-\makeatother
-\newcommand{\bigA}{\DOTSB\bigop[1]{\mathsf{A}}}
-\theoremstyle{definition}
-\newtheorem{remark}{Remark}
 %%%%%%%%%%%%%%%%%%%%% END MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% add all your non-mathematical macros and other random settings in here.
+%% add all your non-mathematical macros and other random settings here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OTHER MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% for basic commenting purposes (you can add more)
+
+%% color used for questions by committee members
+\newcommand{\question}{\textcolor{RoyalBlue}}
+
+%% for personal comments
 \newcommand{\COMMENT}{\textcolor{red}}
 \newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
-\newcommand{\ADDFIGURE}{\COMMENT{(ADD FIGURE)}}
-\newcommand{\ADDTABLE}{\COMMENT{(ADD TABLE)}}
 
-%% to add quotes
+%%% to add small quotes
 \newcommand{\say}[2]{\hfill\small\enquote{\textit{#1}}{ - \small\textsc{#2}.}}
-
-%% color used for questions 
-\newcommand{\question}{\textcolor{RoyalBlue}}
 
 %% you can use other packages for more complicated review and comment section
 
@@ -295,34 +226,23 @@ aboveskip=0.5cm}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE AND AUTHOR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\title{\vspace{-0.75in}\large{Report title goes here}}
-\author[]{Author name\footnote{Contact: author  \texttt{(author-email)}}} 
+\singlespacing
+\title{\vspace{-\baselineskip}\large{Article title goes here}}
+\author[]{Author name\footnote{Contact: author \texttt{(author-email)}}} 
 \affil[]{Author affiliation}
 \date{}
 \maketitle
-\vspace{-0.5cm} \hrule
+\vspace{-\baselineskip} \hrule
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END TITLE AND AUTHOR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\pagenumbering{arabic}                      % arabic page numbering
 \setcounter{page}{1}
-\section{Introduction}
 
 
-\section{Literature review}
+\blinddocument
 
-
-
-\section{Methodology}
-
-
-
-\section{Results}
-
-
-
-\section{Discussion}
+\blindtext \cite{dirac}
 
 
 
