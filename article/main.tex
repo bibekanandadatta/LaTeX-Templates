@@ -32,11 +32,12 @@
 
 %% if this seems too widespread for you, try changing it locally using
 %% \begin{group} ... \renewcommand{\arraystretch} ... \end{group} commands
-\def\GlobalTableSpacing{1.2}                % global spacing parameter for table
+\def\GlobalTableSpacing{1.1}                % global spacing parameter for table
 
+\def\GlobalMargin{1.0in}                    % margin on all sides
 \def\ParagraphSpacing{\baselineskip}        % spacing between paragraph
 \def\ParagraphIndent{0}                     % indentation at the beginning of the paragraph
-\def\FullCiteSpacing{1.25}                  % spacing in a fullcite item
+\def\FullCiteSpacing{1}                     % spacing in a fullcite item
 \def\BibItemSpacing{0.5\baselineskip}       % spacing between bibliographic items in reference
 \def\FootnoteSpacing{0.75\baselineskip}     % spacing between footnotes
 \def\CaptionSpacing{0}                      % spacing between the figure and the caption (unit: pt)
@@ -127,7 +128,7 @@
 
 
 %%% margin settings with geometry package
-\geometry{left=1.0in, right=1.0in, top=1.0in, bottom=1.0in}
+\geometry{margin=\GlobalMargin}
 
 
 %%% settings for the hyperref package
@@ -140,9 +141,11 @@
 
 
 %%% authblk title, author, and affiliation font size
+%%% if you have more authors add more symbols (equal to the number of authors)
+%%% you can comment out this to have the default settings from authblk package
 \renewcommand*{\Authfont}{\normalsize}
 \DefineFNsymbolsTM{otherfnsymbols}{%
-  \textdagger    \dagger             % author name will have a dagger symbol for the footnote
+  \textdagger    \dagger             % author name will have a dagger symbol
 }%
 \setfnsymbol{otherfnsymbols}
 \renewcommand\Affilfont{\itshape\small}
