@@ -6,7 +6,7 @@ This is a collection of personal LaTeX templates (article, large report, and bea
 > If you are new to using LaTeX, these templates may be a bit overwhelming to you. I highly suggest going through the main files of the repository you are interested in before using them. Each template subdirectory includes a separate README file that describes the details of the template. Additionally, I generously commented on different sections of the scripts.
 
 > [!WARNING]
-> I do not use the beamer template regularly except for a few occasions. This is a very primitive template but I intend to update it soon. I also have not added the `README` file for this template yet. Hopefully, it will be there soon :pray:! 
+> I do not use the beamer template regularly except for a few occasions. This is a very primitive template but I intend to update it soon :pray:! 
 
 
 ## Compiling on Overleaf
