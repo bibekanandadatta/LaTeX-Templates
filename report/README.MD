@@ -4,9 +4,7 @@ This template shares similarities with [JHU dissertation template](https://githu
 
 - This is based on the LaTeX report class which uses a chapter-wise arrangement of the document. The directory contains a main file `(00-main.tex)` which you need to compile to generate the report. The main file includes a separate `my-preamble.tex` file which is added using `\input{}` command. This preamble file includes all the necessary packages and settings for document formatting. Most of the necessary settings for document formatting are declared as variables at the beginning of the `00-main.tex` file. Most likely, you can make changes there to obtain your preferred format. In the main document section of the `00-main.tex` file, different chapters are added using the `\include{}` command.
 
-- In addition to the formatting-related variables, if your bib file has a different name than the current file, then change the `BibFileName` variable. Make sure to specify the correct name for the `graphicspath` as well.
-
-- I used the Latin Modern Roman font (loaded using the `lmodern` package) for the document typeset in LaTeX because the text and math environments have consistent typesetting. You can try other fonts, but you should be careful about being consistent, especially for math and text typesettings. [Follow this discussion on StackExchange to learn more about fonts in LaTeX](https://tex.stackexchange.com/questions/59702/suggest-a-nice-font-family-for-my-basic-latex-template-text-and-math).
+- In addition to the formatting-related variables, if your bib file has a different name than the current file, then change the `BibFileName` variable.
 
 - Add all the figures in the `figures` subdirectory. If your subdirectory name is different, then change the `FigurePath` variable. You can add chapter-wise PDF files (which is what I prefer) or just add all of them as you have them in that directory.
 
@@ -17,6 +15,8 @@ This template shares similarities with [JHU dissertation template](https://githu
   - The title page does not have any pagination. You can customize the title page easily based on your needs or preferences. The pagination counter starts from the abstract page with the Roman numeral ii. For the main text in the proposal document, the pagination resets in Arabic starting from 1.
   - If the chapter name is too long, you may have to customize the header spacing in the geometry settings options to accommodate that. Tweak the variables `HeaderHeight` and `HeaderSpace` in the variable declaration section. You can add the `showframe` option to the `geometry{}` command to see the layout of your document.
   - If you have one or two chapters with long titles, changing it locally for individual chapters is a bit tricky task. In that case, you can use a header with a short chapter title option. See the examples given in individual chapters on how to add a shorter title. But if it gets difficult to customize or generalize, you can also consider removing all the header options by commenting them out in the document section of the `00-main.tex` file.
+
+- I used the Latin Modern Roman font (loaded using the `lmodern` package) for the document typeset in LaTeX because the text and math environments have consistent typesetting. You can try other fonts, but you should be careful about being consistent, especially for math and text typesettings. [Follow this discussion on StackExchange to learn more about fonts in LaTeX](https://tex.stackexchange.com/questions/59702/suggest-a-nice-font-family-for-my-basic-latex-template-text-and-math).
 
 - The most common and popular packages for writing the report are added in the `LaTeX CLASS AND PACKAGES` sections. Check the packages; add any additional package you need and/or customize your options there.
 
