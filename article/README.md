@@ -1,3 +1,5 @@
+# LaTeX Article template
+
 This template shares similarities with [JHU MechE dissertation proposal template](https://github.com/bibekananda-datta/JH-MechE-Dissertation-Proposal-Template). You can find more details about the template there.
 
 - This is based on the LaTeX article class with the necessary packages to write a small to decent-sized article (up to a few 10s of pages). Users can add more packages and define more macros based on their needs. I use this template regularly for scientific writing.
