@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% JH colors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% following colors are defined based on: https://brand.jhu.edu/color
+\definecolor{HeritageBlue}{RGB}{0,45,114}       % heritage blue
+\definecolor{SpiritBlue}{RGB}{114,172,229}      % spirit blue
+
+\definecolor{JHUPastle}{RGB}{0,155,119}         % pastle
+\definecolor{JHUDeepBlue}{RGB}{0,114,206}       % deep blue
+
+\definecolor{JHURed}{RGB}{166,25,46}            % red
+\definecolor{JHUGreen}{RGB}{40,97,64}           % green
+
+\definecolor{JHUViolet}{RGB}{81,40,79}          % violet
+\definecolor{JHUPurple}{RGB}{161,90,149}        % purple
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% JH COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% COLOR PALETTE SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% JHU color is used to set the palette for the beamer template
+
+\setbeamercolor{palette primary}{bg=HeritageBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=HeritageBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=HeritageBlue,fg=white}
+\setbeamercolor{palette quaternary}{bg=HeritageBlue,fg=white}
+\setbeamercolor{sidebar}{bg=White}
+\setbeamercolor{palette sidebar primary}{bg=white,fg=HeritageBlue}
+\setbeamercolor{palette sidebar secondary}{bg=white,fg=HeritageBlue}
+\setbeamercolor{palette sidebar tertiary}{bg=white,fg=HeritageBlue}
+\setbeamercolor{palette sidebar quaternary}{bg=white,fg=HeritageBlue}
+
+\setbeamercolor{titlelike}{bg=HeritageBlue,fg=White}
+\setbeamercolor{author}{fg=HeritageBlue}
+\setbeamercolor{institute}{fg=HeritageBlue}
+\setbeamercolor{date}{fg=HeritageBlue}
+
+\setbeamercolor{frametitle}{bg=HeritageBlue,fg=White}
+\setbeamercolor{frametitle continuation}{bg=HeritageBlue,fg=White}
+
+\setbeamercolor{section in toc}{fg=HeritageBlue}        % TOC sections
+\setbeamercolor{structure}{fg=HeritageBlue}             % itemize, enumerate, etc
+
+\setbeamercolor{title in sidebar}{fg=HeritageBlue}
+\setbeamercolor{author in sidebar}{fg=SpiritBlue}
+
+\setbeamercolor{block title}{bg=HeritageBlue,fg=White}
+\setbeamercolor{block body}{bg=HeritageBlue!10,fg=Black} 
+\setbeamercolor{block title alerted}{bg=JHURed,fg=White}
+\setbeamercolor{block body alerted}{bg=JHURed!10,fg=Black} 
+\setbeamercolor{block title example}{bg=JHUGreen,fg=White}
+\setbeamercolor{block body example}{bg=JHUGreen!10,fg=Black} 
+
+\setbeamercolor{footnote}{bg=White,fg=HeritageBlue}
+\setbeamercolor{footnote mark}{bg=White,fg=HeritageBlue}
+
+\setbeamercolor{alerted text}{fg=JHURed}
+
+%%%%%%%%%%%%%%%%%%% END COLOR PALETTE SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% size of the fonts in different environments of the beamer template
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\normalsize}
+\setbeamerfont{institute}{size=\scriptsize}
+\setbeamerfont{frametitle}{size=\Large}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% END FONT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% FRAME TITLE, SIDEBAR, FOOTER SETTINGS %%%%%%%%%%%%%%%%%
+\makeatletter
+    \logo{\includegraphics[height=1cm]{JHU_shield.pdf}}
+    \setlength{\beamer@headheight}{1cm}
+\makeatother
+
+\makeatletter
+\setlength\beamer@sidebarwidth{0.75in}
+  \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+  }%
+\makeatother
+
+\setbeamertemplate{navigation symbols}
+{\tiny\insertframenumber/\inserttotalframenumber}
+
+%%%%%%%%%%%%% END FRAME TITLE, SIDEBAR, FOOTER SETTINGS %%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% TOC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% the next block of commands puts the table of contents at the 
+%%%% beginning of each section and highlights the current section
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%% END TOC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%

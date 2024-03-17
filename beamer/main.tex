@@ -1,0 +1,177 @@
+\def\BibFileName{template.bib}                  % name of BibLaTeX file with all the 
+\def\FigurePath{figures}                        % subdirectory for the figure files 
+
+%%%%%%%%%%%%%%%%%%%%%%%% LaTeX CLASS AND THEME %%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[xcolor=dvipsnames,aspectratio=169]{beamer}
+\useoutertheme[left]{sidebar}
+\useinnertheme{rounded}
+\usefonttheme[onlymath]{serif}                  % to use regular math font
+
+\input{theme-preamble}
+%%%%%%%%%%%%%%%%%%%%%% END LaTeX CLASS AND THEME %%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% LaTeX PACKAGE AND SETTINGS %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak, cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx,upgreek}
+
+
+\usepackage[ruled]{algorithm2e}             % to manage algorithm environment
+\usepackage[american]{babel}                % for different language typography
+
+\usepackage[style=authoryear,autocite=footnote,backend=biber]{biblatex}
+
+\usepackage{blindtext}
+
+\usepackage{caption,subcaption}             % to manage captions
+\usepackage{csquotes,epigraph,varwidth}     % for managing quotes
+\usepackage{float}                          % to manage floating environment
+\usepackage[T1]{fontenc}                    % for font encoding
+\usepackage[bottom]{footmisc}               % footnote environment management
+\usepackage{graphicx,wrapfig}               % to manage images
+\usepackage{geometry}                       % to manage margins and others
+\usepackage{hyperref}                       % for hyperlinks
+\usepackage{listings}                       % to include codes
+
+%%% table related packages
+\usepackage{booktabs,longtable,makecell,multicol,multirow,tabularx,xltabular}
+
+\usepackage[rightcaption]{sidecap}          % for sideway captions
+\usepackage{tikz}                           % package for drawing
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=JHUPurple,citecolor=JHUPurple}
+\addbibresource{\BibFileName}
+\graphicspath{{\FigurePath/}}
+
+%%%%%%%%%%%%%%%%%%% END LaTeX PACKAGE AND SETTINGS %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\BLUE}{\textcolor{JHUDeepBlue}}
+\newcommand{\PURPLE}{\textcolor{JHUPurple}}
+\newcommand{\RED}{\textcolor{Red}}
+\newcommand{\GREEN}{\textcolor{Green}}
+
+%%%%%%%%%%%%%%%%%%%%%%% END LaTeX MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[About Beamer]
+{Beamer template for Johns Hopkins University}
+%\subtitle{Template made on customized theme}
+\author[Doe]{John Doe}
+
+\institute[JHU] {
+    Affiliated position \\
+    Name of department or institute \\
+    \includegraphics[width=0.35\textwidth, trim={0.6in 0.35in 0.6in 0.3in},clip]{JHU_logo.pdf}
+}
+
+\date[VLC 2021]{Very Large Conference, April 2021}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begingroup
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setlength{\hoffset}{-.4\beamer@sidebarwidth}
+\makeatother
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{First project}
+\subsection{Introduction}
+\begin{frame}{Highlighting text}
+    
+    In this slide, some important text will be \alert{highlighted} with JHU color because it's important. Please, don't \alert{abuse} it.
+    
+    \begin{block}{Remark}
+        Sample text
+    \end{block}
+    
+    \begin{alertblock}{Important theorem}
+        Sample text in the red box
+    \end{alertblock}
+    
+    \begin{examples}
+        Sample text in the green box. The title of the block is ``Examples''.
+    \end{examples}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Environment tests}
+\begin{frame}{Enumerate and itemize test}
+    \textbf{Enumerate environment with classic colors}
+    \begin{enumerate}
+        \item Hello, this is the \RED{first} point
+        %
+        \item This is my \GREEN{second} point
+    \end{enumerate}
+    
+    \vspace{0.5in}
+    
+    \textbf{Itemize environment with JHU colors}
+    \begin{itemize}
+        \item This is a separate \BLUE{itemize} test 
+        %
+        \item Second point for the \PURPLE{separate} test
+    \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Second project}
+\subsection{Testing math environment}
+\begin{frame}{Integration}
+    Integration is also known as anti-derivative which represents the area under the curve. For indefinite integral, we should add a constant $C$ to the anti-derivative expressions.
+    \begin{equation*}
+        \int \exp(x) \ dx = \exp(x) + C
+    \end{equation*}
+    
+    You can \textbf{\BLUE{boldface colors}} to emphasize even more\footnote{Hyperlinks will appear as \url{https://overleaf.com}}.
+   
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Testing overlays}
+\begin{frame}{More Lists}
+    \begin{enumerate}[I]
+    \item<1-> Point A\footnotemark
+    \item<2-> Point B
+    \begin{itemize}
+    \item<3-> part 1
+    \item<4-> part 2
+    \end{itemize}
+    \item<5-> Point C
+    \item<6-> Point D
+    \end{enumerate}
+    
+    \footnotetext{Second footnote testing here}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overlaying math environment}
+\begin{frame}{Maths Blocks}
+    \begin{theorem}<1->[Pythagoras] 
+        $ a^2 + b^2 = c^2$
+    \end{theorem}
+    \begin{corollary}<2->
+        $ x + y = y + x  $
+    \end{corollary}
+    \begin{proof}<3->
+        $\omega +\phi = \epsilon $
+    \end{proof}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Third project}
+\subsection{References}
+\begin{frame}{References}
+    \blindtext \footcite{einstein}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
