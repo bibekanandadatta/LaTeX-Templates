@@ -1,4 +1,4 @@
-# LaTeX Article template
+# LaTeX Article Template
 
 This template shares similarities with [JHU MechE dissertation proposal template](https://github.com/bibekananda-datta/JH-MechE-Dissertation-Proposal-Template). You can find more details about the template there.
 
