@@ -1,11 +1,29 @@
 \def\BibFileName{template.bib}                  % name of BibLaTeX file with all the 
 \def\FigurePath{figures}                        % subdirectory for the figure files 
 
+
+\def\AspectRatio{169}                           % aspect ratio of the presentation
+\def\FontPackage{helvet}                        % font package for presentation
+
+\def\BaseFontSize{11pt}                         % base font size for beamer
+\def\TitleFontSize{\Large}                      % title font size
+\def\SubtitleFontSize{\large}                   % subtitle font size
+\def\AuthorFontSize{\normalsize}                % author font size
+\def\InstituteFontSize{\footnotesize}           % institute font size
+\def\DateFontSize{\normalsize}                  % font size for the date on title page
+
+\def\TitleLogoSize{0.35\textwidth}              % width of the logo on the title page
+
+\def\FrameHeadHeight{1.0cm}                     % frame title height 
+\def\SidebarWidth{0.75in}                       % width of the siebar
+
+\def\FrameTitleFontSize{\Large}                 % frame title font size
+
 %%%%%%%%%%%%%%%%%%%%%%%% LaTeX CLASS AND THEME %%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[xcolor=dvipsnames,aspectratio=169]{beamer}
+\documentclass[xcolor=dvipsnames,aspectratio=\AspectRatio,\BaseFontSize]{beamer}
 \useoutertheme[left]{sidebar}
 \useinnertheme{rounded}
-\usefonttheme[onlymath]{serif}                  % to use regular math font
+% \usefonttheme[onlymath]{serif}                  % to use regular math font
 
 \input{theme-preamble}
 %%%%%%%%%%%%%%%%%%%%%% END LaTeX CLASS AND THEME %%%%%%%%%%%%%%%%%%%%%%
@@ -13,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%% LaTeX PACKAGE AND SETTINGS %%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak, cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx,upgreek}
 
-
+\usepackage{helvet}
 \usepackage[ruled]{algorithm2e}             % to manage algorithm environment
 \usepackage[american]{babel}                % for different language typography
 
@@ -43,44 +61,66 @@
 
 %%%%%%%%%%%%%%%%%%% END LaTeX PACKAGE AND SETTINGS %%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%% LaTeX MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%%
+
+\allowdisplaybreaks[1]
+\setcounter{MaxMatrixCols}{20}          % maximum columns in matrix = 20
+\numberwithin{equation}{section}        % eqn no begins with section no
+\newcommand{\dC}{$^{\circ}$C}           % degree celsius symbol
+\newcommand{\vect}[1]{\mathbf{#1}}      % boldface for vectors and tensors
+\DeclareMathOperator{\tr}{tr}           % trace of a matrix
+\DeclareMathOperator{\divg}{div}        % divergence of vector and tensor
+\DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
+
+%% these are just some examples; add more macros for your custom symbols
+
+%%%%%%%%%%%%%%%%%% END MATH SETTINGS AND MACROS %%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%% HIGHLIGHTING MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\BLUE}{\textcolor{JHUDeepBlue}}
 \newcommand{\PURPLE}{\textcolor{JHUPurple}}
 \newcommand{\RED}{\textcolor{Red}}
 \newcommand{\GREEN}{\textcolor{Green}}
 
-%%%%%%%%%%%%%%%%%%%%%%% END LaTeX MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% these are just some examples; add more macros
+
+%%%%%%%%%%%%%%%%%%%% END HIGHLIGHTING MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[About Beamer]
-{Beamer template for Johns Hopkins University}
+{\LaTeX\ beamer template for Johns Hopkins University}
 %\subtitle{Template made on customized theme}
 \author[Doe]{John Doe}
 
 \institute[JHU] {
     Affiliated position \\
     Name of department or institute \\
-    \includegraphics[width=0.35\textwidth, trim={0.6in 0.35in 0.6in 0.3in},clip]{JHU_logo.pdf}
+    \includegraphics[width=\TitleLogoSize,trim={0.6in 0.35in 0.6in 0.3in},clip]{JHU_logo.pdf}
 }
 
-\date[VLC 2021]{Very Large Conference, April 2021}
+\date[ALC 2024]{A Large Conference, March 2024}
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END DOCUMENT INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
+%%%% following code snippet is needed to remove the navigation symbols from the 
+%%%% title slide as well as to bring the frame at the center by offsetting for 
+%%% the sidebar.
 \begingroup
 \makeatletter
-\setbeamertemplate{navigation symbols}{}
-\setlength{\hoffset}{-.4\beamer@sidebarwidth}
+\setbeamertemplate{navigation symbols}{}            % removes page numbering
+\setlength{\hoffset}{-.425\beamer@sidebarwidth}     %
 \makeatother
 \begin{frame}[plain]
     \titlepage
 \end{frame}
 \endgroup
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{First project}
@@ -173,5 +213,9 @@
     \blindtext \footcite{einstein}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 \end{document}

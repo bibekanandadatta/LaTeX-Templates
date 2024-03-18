@@ -56,24 +56,29 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% FONT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% size of the fonts in different environments of the beamer template
-\setbeamerfont{title}{size=\Large}
-\setbeamerfont{subtitle}{size=\large}
-\setbeamerfont{author}{size=\normalsize}
-\setbeamerfont{institute}{size=\scriptsize}
-\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{title}{size=\TitleFontSize}
+\setbeamerfont{subtitle}{size=\SubtitleFontSize}
+\setbeamerfont{author}{size=\AuthorFontSize}
+\setbeamerfont{institute}{size=\InstituteFontSize}
+\setbeamerfont{date}{size=\DateFontSize}
+
+\setbeamerfont{frametitle}{size=\FrameTitleFontSize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% END FONT SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 %%%%%%%%%%%%%%% FRAME TITLE, SIDEBAR, FOOTER SETTINGS %%%%%%%%%%%%%%%%%
 \makeatletter
-    \logo{\includegraphics[height=1cm]{JHU_shield.pdf}}
-    \setlength{\beamer@headheight}{1cm}
+    \logo{\includegraphics[height=\FrameHeadHeight]{JHU_shield.pdf}}
+    \setlength{\beamer@headheight}{\FrameHeadHeight}
 \makeatother
 
 \makeatletter
-\setlength\beamer@sidebarwidth{0.75in}
-  \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
-  {
+%%% following two lines removes the slide title and author from the sidebar
+    \setlength\beamer@sidebarwidth{\SidebarWidth}
+    \setbeamertemplate{sidebar \beamer@sidebarside} 
+  { %%% following code snippet customizes the width of the sidebar
     \beamer@tempdim=\beamer@sidebarwidth%
     \advance\beamer@tempdim by -6pt%
     \insertverticalnavigation{\beamer@sidebarwidth}%
@@ -87,8 +92,11 @@
   }%
 \makeatother
 
+%%% following code snippets removes the navigation symbols 
+%%% and inserts the frame number/total frame in the footer
 \setbeamertemplate{navigation symbols}
 {\tiny\insertframenumber/\inserttotalframenumber}
+%%%% TO-DO: MORE CUSTOMIZATION OF THE FOOTER
 
 %%%%%%%%%%%%% END FRAME TITLE, SIDEBAR, FOOTER SETTINGS %%%%%%%%%%%%%%%
 
@@ -96,10 +104,11 @@
 %%%% the next block of commands puts the table of contents at the 
 %%%% beginning of each section and highlights the current section
 \AtBeginSection[]
-{
+{ %%% use \tableofcontents[hideothersection] for different outline appearance
   \begin{frame}
-    \frametitle{Table of Contents}
+    \frametitle{Outline}
     \tableofcontents[currentsection]
   \end{frame}
 }
+
 %%%%%%%%%%%%%%%%%%%%%%%%% END TOC SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
