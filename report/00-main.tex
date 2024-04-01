@@ -7,66 +7,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% if possible, please make your formatting changes here through the variables 
-%% go through all the variables and understand what role they play in formatting
-%%%%%%%%%%%%%%%%%%%%%% LIST OF VARIABLES FOR FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%
-
-\def\FontPackage{lmodern}                   % latin modern font (you can also change it to times)
-\def\BibFileName{template.bib}              % name of BibLaTeX file with all the bibliography
-\def\FigurePath{figures}                    % subdirectory for the figure files
-
-
-\def\NoSectionLevel{3}                      % 3 levels for sections ... to subsubsection
-\def\NoTocLevel{3}                          % no of levels showed in the table of contents
-\def\TocIndent{0}                           % indentation in the list of figs and tables
-%% 3 levels mean section to subsubsection.. decrease if you want less to show in TOC
-
-\def\MainTextSpacing{\singlespacing}        % double spacing in the main text (JH library requirement)
-\def\TOCTextSpacing{\onehalfspacing}        % one-half spacing for TOC texts
-\def\BibTextSpacing{\singlespacing}         % single spacing for bibliography
-%% JH library does not specify spacing for TOC and bibliographic references
-
-\def\GlobalMargin{1.0in}                    % margin on all sides
-\def\PrintingOffset{0.0in}                  % additional space on the left margin for the print copy
-\def\HeaderHeight{20}                       % height of the header (unit: pt)
-\def\HeaderSpace{10}                        % space between header and the following text (unit: pt)
-\def\ChapterTopMargin{-48}                  % white space on top of the chapter heading (unit: pt)
-\def\ChapterToTitle{-12}                    % space between chapter to title (unit: pt)
-\def\TitleToText{18}                        % space between the chapter title to the following text (unit: pt)
-
-
-\def\ParagraphSpacing{\baselineskip}        % spacing between paragraph
-\def\ParagraphIndent{0}                     % indentation at the beginning of the paragraph
-\def\FullCiteSpacing{1}                     % spacing in a fullcite item
-\def\BibItemSpacing{0.5\baselineskip}       % spacing between bibliographic items in reference
-\def\FootnoteSpacing{\baselineskip}         % spacing between footnotes
-\def\CaptionSpacing{0}                      % spacing between the figure and the caption (unit: pt)
-
-
-%% if you have a longer quote, you may have to change it.
-\def\QuoteWidth{0.65\textwidth}             % width of quote in epigraph
-
-
-%% if this seems too widespread for you, try changing it locally using
-%% \begin{group} ... \renewcommand{\arraystretch} ... \end{group} commands
-\def\GlobalTableSpacing{1.1}                % global spacing parameter for table
-
-
-% font format for chapter heading and title
-\def\ChapterFont{\singlespacing \Large \bfseries}
-\def\SectionFont{\large\bfseries}           % section heading font format
-\def\SubsectionFont{\normalsize\bfseries}   % subsection heading font format
-\def\SubsubsectionFont{\normalsize\itshape} % subsubsection heading font format
-\def\CaptionFontSize{small}                 % caption font size
-\def\CaptionFontType{bf}                    % boldface label for captions
-\def\CaptionSeparator{colon}                % separates caption heading from text. can use 'period' as well
-\def\CodeFont{\footnotesize\ttfamily}       % font for including codes using listing
-
-%%%%%%%%%%%%%%%%%%%% END LIST OF VARIABLES FOR FORMATTING %%%%%%%%%%%%%%%%%%%%%%
 
 %% this file contains all the packages, preamble, formatting settings, and macros
-\input{my-preamble}
+\input{01-my-preamble}
 
 %% if there is any missing package you can add it here, or add it to the preamble
 %% you can also change package options and add more macros here or in the file
@@ -76,53 +19,56 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT BEGINS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-% \linenumbers                          % may find useful during drafting
-%% place the command where you want to start your line numbering
+
+
+\include{02-title}                          % title page
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\onehalfspacing                         % spacing for the title page
-\include{01-title}                      % title page
-
-%% chapter header and page numbering set up
-%% if you want to remove the headers, comment following 4 lines
-\pagestyle{fancy}                       % header settings
-\fancyhead[R]{}                         % empty top-right header throughout the document
-\fancyhead[L]{\nouppercase \leftmark}   % avoiding upper-case in header
-\pagenumbering{roman}                   % roman numeral
-\setcounter{page}{2}                    % begin page counter
+%%%% text spacing, page numbering, and header settings
+\MainTextSpacing                            % double spacing for the contents
+\pagenumbering{roman}                       % pagination style: Roman numeral
+\setcounter{page}{2}                        % page counter starts at roman ii
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\fancyhead[R]{}               
+\fancyhead[L]{\nouppercase \leftmark}       % prints header for unnumbered chap
 
 
-\singlespacing                          % restore single spacing in chapter contents
-\include{02-preface}
+\include{03-preface}
 
 
-\onehalfspacing                         % 1.5 spacing for TOC (looks cluttered w/ single)
-\renewcommand{\contentsname}{Table of Contents}
-\tableofcontents
-\listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
-\listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
+%%%% single spacing is too cluttered and double spacing is too wide-spread
+\microtypesetup{protrusion=false}
+\TOCTextSpacing                             % one-half spacing for the table of contents
+\hypersetup{linkcolor=black}                % local black hyperlink for TOC
+%
+\mytableofcontents
+%
+\mylistoftables
+%
+\mylistoffigures
+%
+\microtypesetup{protrusion=true}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
-\pagenumbering{arabic}                  % arabic numeral for pagination
-% full header for the regular numbered chapters
-\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}} 
+%%%% PAGE and TEXT settings 
+\MainTextSpacing                        % restores double spacing 
+\pagenumbering{arabic}                  % Arabic page numbering
 \fancyhead[L]{\chaptername\ \thechapter. \nouppercase \leftmark}
-\singlespacing                          % restores single spacing in chapter contents
 
 
 % add .tex files for the chapters
-\include{03-chapter-1}
-\include{04-chapter-2}
-\include{05-chapter-3}
-\include{06-chapter-4}
-\include{07-chapter-5}
+\include{04-chapter-1}
+\include{05-chapter-2}
+\include{06-chapter-3}
+\include{07-chapter-4}
+\include{08-chapter-5}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -130,19 +76,21 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACK MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% references
-\clearpage
-\fancyhead[L]{\nouppercase \leftmark}   % shorter header for the unumbered chapters
-\include{08-references}
+%%%% BIBLIOGRAPHIC REFERENCES
+\BibTextSpacing                         % text spacing for each bib item
+\fancyhead[L]{\nouppercase \leftmark}
+\printbibliography[title={Bibliographic references},
+    heading=bibintoc,notcategory=mypapers]
+\clearpage                              % flushes out floating header
 
 
-% full header for the appendix chapters
+
+%%%% appendix chapters w/ same main text spacing and header style
+\MainTextSpacing
 \fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
-% add .tex files for the appendix chapters
 \include{09-appendix-A}
 \include{10-appendix-B}
 
-%% add more appendix chapters as you need
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END BACK MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
