@@ -1,4 +1,4 @@
-# LaTex Report Template
+# LaTeX Report Template
 
 This template shares similarities with [JHU dissertation template](https://github.com/bibekananda-datta/JHU-Dissertation-Template). You can find more details about the template there.
 
