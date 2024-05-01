@@ -64,11 +64,11 @@
 
 
 %%%% TOC APPEARANCE
-\def\NoTocLevel{3}                          % no of levels showed in TOC
+\def\NoTOCLevel{3}                          % no of levels showed in TOC
 \def\SecTOCSpacing{0.75\baselineskip}       % spacing between sections
 \def\SubsecTOCSpacing{0.5\baselineskip}     % ... between subsections
 \def\SubsubsecTOCSpacing{0.3\baselineskip}  % ... between subsubsections
-\def\TocIndent{0 pt}                        % indentation in the list of figs and tables
+\def\TOCIndent{0 pt}                        % indentation in the list of figs and tables
 \def\AfterLOTTitleSpacing{0.1\baselineskip}
 
 %%%%%%%%%%%%%%%%%%%% END LIST OF VARIABLES FOR FORMATTING %%%%%%%%%%%%%%%%%%%%%%
@@ -205,7 +205,7 @@
 
 
 %%%% TOCLOFT settings
-\setcounter{tocdepth}{\NoTocLevel}                      % list depth in ToC
+\setcounter{tocdepth}{\NoTOCLevel}                      % list depth in ToC
 \renewcommand{\cfttoctitlefont}{\SectionFont}           % font for ToC title
 \renewcommand{\cftloftitlefont}{\SectionFont}           % font for LoF title
 \renewcommand{\cftlottitlefont}{\SectionFont}           % font for LoT title
@@ -219,14 +219,14 @@
 
 %% tweak to LOT and LOF to add 'Table'/ 'Figure' to the table/ figure caption listing
 %% to change the distance to the start of the table/ figure title
-\setlength{\cfttabindent}{\TocIndent}               % indentation from tables in LoT
+\setlength{\cfttabindent}{\TOCIndent}               % indentation from tables in LoT
 \setlength{\cftafterlottitleskip}{\AfterLOTTitleSpacing}
 \renewcommand{\cfttabpresnum}{\bfseries Table }
 \setlength{\cfttabnumwidth}{\widthof{\textbf{Table~999.999~}}}
 \setlength{\cftbeforetabskip}{\LOTItemSpacing}      % spacing between each item
 
 
-\setlength{\cftfigindent}{\TocIndent}               % indentation from figures in LoF
+\setlength{\cftfigindent}{\TOCIndent}               % indentation from figures in LoF
 \setlength{\cftafterloftitleskip}{\AfterLOTTitleSpacing}
 \renewcommand{\cftfigpresnum}{\bfseries Figure }
 \setlength{\cftfignumwidth}{\widthof{\textbf{Figure~999.999~}}}
@@ -293,7 +293,7 @@
 %% \say{Don't believe everything you see on the internet}{Isaac Newton}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END OTHER MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -310,6 +310,9 @@
 \DeclareMathOperator{\grad}{grad}       % gradient of vector and tensor
 \DeclareMathOperator{\curl}{curl}       % curl of vector and tensor
 
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\counterwithin{remark}{section}
 %% these are just some examples; add more macros defined by you
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% END MATH MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -343,9 +346,12 @@
 The above texts were generated using \texttt{blindtext} package \cite{dirac}.
 
 
-\section*{Bibliographic references}
-\addcontentsline{toc}{section}{Bibliographic references}
-\printbibliography[notcategory=fullcited,heading=none]
+%% references
+\BibTextSpacing                         % text spacing for each bib item
+\fancyhead[L]{\nouppercase \leftmark}
+\printbibliography[title={Bibliographic references},
+    heading=bibintoc,notcategory=mypapers]
+\clearpage                              % flushes out floating header
 
 
 \end{document}
